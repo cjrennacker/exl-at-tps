@@ -249,7 +249,7 @@ body {
   .site-nav { flex-wrap: wrap; justify-content: center; height: auto; }
   .site-nav > li > a, .site-nav > li > button { padding: 8px 12px; height: auto; }
   .header-right { display: none; }
-  .nav-dropdown { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+  .nav-dropdown { position: static !important; width: 100%; box-shadow: none; border-top: 2px solid var(--gold); }
 }
 
 /* ── HERO ── */
@@ -344,7 +344,7 @@ body {
   letter-spacing: 0.25em; color: var(--maroon);
   display: flex; align-items: center; gap: 10px;
 }
-.gold-band-item::before { content: ' -- '; opacity: 0.4; }
+.gold-band-item::before { content: ''; display: none; }
 
 /* ── SHARED LAYOUT ── */
 .container { max-width: 1280px; margin: 0 auto; padding: 0 64px; }
@@ -750,7 +750,7 @@ p:last-child { margin-bottom: 0; }
 
 /* ── FOOTER ── */
 .site-footer {
-  background: var(--maroon-deep); padding: 64px 0 40px;
+  background: var(--maroon); padding: 64px 0 40px;
   border-top: 4px solid var(--gold);
 }
 .footer-inner {
@@ -1120,7 +1120,7 @@ p:last-child { margin-bottom: 0; }
     <div class="two-col two-col--60">
       <div>
         <span class="eyebrow">About the client</span>
-        <h2>The Polytechnic School at ASU.</h2>
+        <h2>The Polytechnic School.</h2>
         <div class="gold-line"></div>
         <p>The Polytechnic School (TPS) at Arizona State University is home to programs across engineering technology, computing, graphic information technology, and applied sciences. Experiential learning already happens across many of its programs, expressed through doing, reflecting, and applying.</p>
         <p>But it happens inconsistently, under different names, with different levels of recognition, and without a unified story. The Experiential Learning Council has spent two semesters defining what ExL means at TPS. Now, they need your help bringing that vision to life.</p>
@@ -1163,7 +1163,7 @@ p:last-child { margin-bottom: 0; }
     <div class="two-col two-col--60">
       <div>
         <span class="eyebrow" style="color:var(--maroon);">What is experiential learning?</span>
-        <h2>Learning by doing, and thinking about what you did.</h2>
+        <h2>Learn by doing, then reflect on what you did.</h2>
         <div class="maroon-line"></div>
         <p>Experiential learning is defined as learning from experience: learning by doing and then reflecting on it. Skills and knowledge are acquired through firsthand experiences rather than passive instruction. At TPS, this includes internships, capstone projects, co-ops, research, field practicums, service learning, and hands-on lab work across every program.</p>
         <p>What makes TPS's approach distinct is the insistence on pairing practice with reflection (Principled Innovation<sup>™</sup>). Doing something is not enough. Students are expected to think critically about what they did, what they learned, and how it connects to theory and future practice. That cycle (doing, reflecting, applying) is the engine of ExL @ TPS.</p>
@@ -1295,7 +1295,7 @@ p:last-child { margin-bottom: 0; }
     <p>The Experiential Learning Council, as a whole, is your client. These are the people who will evaluate your concept and select the direction TPS moves forward with.</p>
     <div class="stakeholder-list" style="margin-top:48px;">
       <div class="stakeholder-item">
-        <div class="stakeholder-avatar"><img src="https://poly.engineering.asu.edu/wp-content/uploads/sites/27/2020/07/kgpaters.png" alt="Kurt Patterson" data-lightbox data-caption="Kurt Patterson  --  Director, The Polytechnic School"></div>
+        <div class="stakeholder-avatar"><img src="https://poly.engineering.asu.edu/wp-content/uploads/sites/27/2020/07/kgpaters.png" alt="Kurt Patterson"></div>
         <div>
           <div class="stakeholder-name">Kurt Patterson</div>
           <div class="stakeholder-role">Professor and Director, The Polytechnic School</div>
@@ -1303,7 +1303,7 @@ p:last-child { margin-bottom: 0; }
         </div>
       </div>
       <div class="stakeholder-item">
-        <div class="stakeholder-avatar"><img src="https://poly.engineering.asu.edu/wp-content/uploads/sites/27/2020/07/Nadia-Kellam-POLY-Retreat-2025-EG-9380-a.jpg-scaled-e1765307847719.jpeg" alt="Nadia Kellam" data-lightbox data-caption="Nadia Kellam  --  ExL Council Member"></div>
+        <div class="stakeholder-avatar"><img src="https://poly.engineering.asu.edu/wp-content/uploads/sites/27/2020/07/Nadia-Kellam-POLY-Retreat-2025-EG-9380-a.jpg-scaled-e1765307847719.jpeg" alt="Nadia Kellam"></div>
         <div>
           <div class="stakeholder-name">Nadia Kellam</div>
           <div class="stakeholder-role">ExL Council Member, Associate Professor and Associate Director for Research Excellence Engineering Programs, The Polytechnic School</div>
@@ -1311,7 +1311,7 @@ p:last-child { margin-bottom: 0; }
         </div>
       </div>
       <div class="stakeholder-item">
-        <div class="stakeholder-avatar"><img src="https://webapp4.asu.edu/photo-ws/directory_photo/cjbledso?size=medium&break=1779396575&blankImage2=1" alt="Cameron Rennacker" data-lightbox data-caption="Cameron Rennacker  --  ExL Council Member, GIT Faculty"></div>
+        <div class="stakeholder-avatar"><img src="https://webapp4.asu.edu/photo-ws/directory_photo/cjbledso?size=medium&break=1779396575&blankImage2=1" alt="Cameron Rennacker"></div>
         <div>
           <div class="stakeholder-name">Cameron Rennacker</div>
           <div class="stakeholder-role">ExL Council Member, Assistant Teaching Professor, The Polytechnic School</div>
@@ -1319,7 +1319,7 @@ p:last-child { margin-bottom: 0; }
         </div>
       </div>
       <div class="stakeholder-item">
-        <div class="stakeholder-avatar"><img src="https://webapp4.asu.edu/photo-ws/directory_photo/jgriff71?size=medium&break=1779410981&blankImage2=1" alt="Joy Griffin" data-lightbox data-caption="Joy Griffin  --  ExL Council Member"></div>
+        <div class="stakeholder-avatar"><img src="https://webapp4.asu.edu/photo-ws/directory_photo/jgriff71?size=medium&break=1779410981&blankImage2=1" alt="Joy Griffin"></div>
         <div>
           <div class="stakeholder-name">Joy Griffin</div>
           <div class="stakeholder-role">ExL Council Member, Assistant Teaching Professor, The Polytechnic School</div>
@@ -1327,7 +1327,7 @@ p:last-child { margin-bottom: 0; }
         </div>
       </div>
       <div class="stakeholder-item">
-        <div class="stakeholder-avatar"><img src="https://webapp4.asu.edu/photo-ws/directory_photo/rroscoe?size=medium&break=1779403381&blankImage2=1" alt="Rod Roscoe" data-lightbox data-caption="Rod Roscoe  --  ExL Council Member"></div>
+        <div class="stakeholder-avatar"><img src="https://webapp4.asu.edu/photo-ws/directory_photo/rroscoe?size=medium&break=1779403381&blankImage2=1" alt="Rod Roscoe"></div>
         <div>
           <div class="stakeholder-name">Rod Roscoe</div>
           <div class="stakeholder-role">ExL Council Member, Associate Professor, The Polytechnic School</div>
@@ -1335,7 +1335,7 @@ p:last-child { margin-bottom: 0; }
         </div>
       </div>
       <div class="stakeholder-item">
-        <div class="stakeholder-avatar"><img src="https://webapp4.asu.edu/photo-ws/directory_photo/bdwilhel?size=medium&break=1779391475&blankImage2=1" alt="Benjie Wilhelm" data-lightbox data-caption="Benjie Wilhelm  --  ExL Council Member"></div>
+        <div class="stakeholder-avatar"><img src="https://webapp4.asu.edu/photo-ws/directory_photo/bdwilhel?size=medium&break=1779391475&blankImage2=1" alt="Benjie Wilhelm"></div>
         <div>
           <div class="stakeholder-name">Benjie Wilhelm</div>
           <div class="stakeholder-role">ExL Council Member, Assistant Teaching Professor, The Polytechnic School</div>
@@ -1793,6 +1793,13 @@ p:last-child { margin-bottom: 0; }
   var successEl = document.getElementById('loader-success');
   var successTxt = document.getElementById('loader-success-text');
 
+  // Show loader only once per session
+  if (sessionStorage.getItem('tps_loaded')) {
+    loader.classList.add('hidden');
+    document.body.style.overflow = '';
+    return;
+  }
+  sessionStorage.setItem('tps_loaded', '1');
   successTxt.textContent = successes[Math.floor(Math.random() * successes.length)];
   var shuffled = phrases.slice().sort(function() { return Math.random() - 0.5; });
   var pidx = 0;
@@ -1974,7 +1981,7 @@ p:last-child { margin-bottom: 0; }
 <style>
 /* ── QUIZ TRIGGER STRIP ── */
 #quiz-trigger {
-  background: var(--maroon); border-top: 4px solid var(--gold);
+  background: var(--gold); border-top: 4px solid var(--maroon);
   padding: 32px 0; position: relative; z-index: 2;
 }
 .quiz-trigger-inner {
@@ -1988,10 +1995,10 @@ p:last-child { margin-bottom: 0; }
 .quiz-trigger-label {
   font-family: 'Barlow Condensed', var(--font);
   font-size: 28px; font-weight: 900; text-transform: uppercase;
-  color: var(--white); margin: 0 0 4px;
+  color: var(--maroon); margin: 0 0 4px;
 }
 .quiz-trigger-sub {
-  font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; margin: 0 0 16px;
+  font-size: 13px; color: var(--maroon); opacity: 0.7; line-height: 1.5; margin: 0 0 16px;
 }
 .quiz-cta {
   background: var(--gold); color: var(--maroon);
@@ -2003,10 +2010,10 @@ p:last-child { margin-bottom: 0; }
 .quiz-cta:hover { background: #e6b020; }
 .quiz-cta:disabled { opacity: 0.4; cursor: not-allowed; }
 .quiz-cta--outline {
-  background: transparent; border: 2px solid var(--gold);
-  color: var(--gold); margin-top: 8px;
+  background: transparent; border: 2px solid var(--maroon);
+  color: var(--maroon); margin-top: 8px;
 }
-.quiz-cta--outline:hover { background: rgba(255,198,39,0.1); }
+.quiz-cta--outline:hover { background: rgba(0,0,0,0.08); }
 
 /* ── QUIZ MODAL OVERLAY ── */
 #quiz-modal, #quiz-success, #quiz-lockout {
@@ -2016,7 +2023,7 @@ p:last-child { margin-bottom: 0; }
   padding: 24px;
 }
 .quiz-modal-card {
-  background: var(--white); max-width: 580px; width: 100%;
+  background: var(--gold-pale); max-width: 580px; width: 100%;
   max-height: 90vh; overflow-y: auto;
 }
 .quiz-header {
@@ -2086,9 +2093,9 @@ p:last-child { margin-bottom: 0; }
 
 /* ── SUCCESS BADGE ── */
 .quiz-badge-card {
-  background: var(--maroon); max-width: 480px; width: 100%;
+  background: var(--gold); max-width: 480px; width: 100%;
   padding: 48px 40px; text-align: center;
-  border-top: 4px solid var(--gold); position: relative;
+  border-top: 4px solid var(--maroon); position: relative;
   max-height: 90vh; overflow-y: auto;
 }
 .quiz-badge-seal { width: 100px; height: 100px; margin: 0 auto 12px; }
@@ -2101,13 +2108,13 @@ p:last-child { margin-bottom: 0; }
 .quiz-badge-title {
   font-family: 'Barlow Condensed', var(--font);
   font-size: 40px; font-weight: 900; text-transform: uppercase;
-  color: var(--gold); line-height: 1; margin-bottom: 6px;
+  color: var(--maroon); line-height: 1; margin-bottom: 6px;
 }
 .quiz-badge-subtitle {
-  font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 12px;
+  font-size: 15px; font-weight: 700; color: var(--maroon); margin-bottom: 12px;
 }
 .quiz-badge-msg {
-  font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 24px;
+  font-size: 13px; color: var(--maroon); opacity: 0.8; line-height: 1.6; margin-bottom: 24px;
 }
 .quiz-badge-stamp {
   border: 2px solid rgba(255,198,39,0.4);
@@ -2116,7 +2123,7 @@ p:last-child { margin-bottom: 0; }
 .quiz-badge-name {
   display: block; font-family: 'Barlow Condensed', var(--font);
   font-size: 22px; font-weight: 900; text-transform: uppercase;
-  color: var(--gold); letter-spacing: 0.05em;
+  color: var(--maroon); letter-spacing: 0.05em;
 }
 .quiz-badge-course {
   display: block; font-size: 10px; font-weight: 700;
@@ -2126,12 +2133,12 @@ p:last-child { margin-bottom: 0; }
 
 /* ── LOCKOUT ── */
 .quiz-lockout-card {
-  background: var(--black); max-width: 420px; width: 100%;
+  background: var(--gold); max-width: 420px; width: 100%;
   padding: 40px 36px; text-align: center;
   border-top: 4px solid var(--maroon);
 }
 .quiz-lockout-msg {
-  font-size: 15px; color: var(--white); line-height: 1.6; margin: 16px 0 8px;
+  font-size: 15px; color: var(--maroon); line-height: 1.6; margin: 16px 0 8px;
 }
 .quiz-lockout-sub {
   font-size: 11px; font-weight: 700; text-transform: uppercase;
@@ -2139,7 +2146,7 @@ p:last-child { margin-bottom: 0; }
 }
 .quiz-countdown {
   font-family: 'Barlow Condensed', var(--font);
-  font-size: 56px; font-weight: 900; color: var(--gold); line-height: 1;
+  font-size: 56px; font-weight: 900; color: var(--maroon); line-height: 1;
 }
 
 /* ── CAMERON EASTER EGG (Option D) ── */

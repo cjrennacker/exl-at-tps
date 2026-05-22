@@ -1163,7 +1163,7 @@ p:last-child { margin-bottom: 0; }
     <div class="two-col two-col--60">
       <div>
         <span class="eyebrow" style="color:var(--maroon);">What is experiential learning?</span>
-        <h2>Learn by doing, and thinking about what you did.</h2>
+        <h2>Learning by doing, and thinking about what you did.</h2>
         <div class="maroon-line"></div>
         <p>Experiential learning is defined as learning from experience: learning by doing and then reflecting on it. Skills and knowledge are acquired through firsthand experiences rather than passive instruction. At TPS, this includes internships, capstone projects, co-ops, research, field practicums, service learning, and hands-on lab work across every program.</p>
         <p>What makes TPS's approach distinct is the insistence on pairing practice with reflection (Principled Innovation<sup>™</sup>). Doing something is not enough. Students are expected to think critically about what they did, what they learned, and how it connects to theory and future practice. That cycle (doing, reflecting, applying) is the engine of ExL @ TPS.</p>
@@ -1181,8 +1181,8 @@ p:last-child { margin-bottom: 0; }
       </div>
       <div>
         <div class="ExL-photo-stack">
-          <img src="images/240409 ASU Outstanding Graduates - Spring 2024 - Day 3 DP7A8270 - SM .jpg"
-               alt="Outstanding Graduates 2024" class="ExL-photo-main">
+          <img src="images/251024 ASU Polytechnic Campus - Dreamscape Class DP7A0287 - PP .jpg"
+               alt="Dreamscape class at ASU Polytechnic Campus" class="ExL-photo-main">
           <img src="images/251021 ASU Polytechnic - Horticulture Lab DP7A9927 AES.jpg"
                alt="Horticulture lab at ASU Polytechnic" class="ExL-photo-accent">
         </div>
@@ -1756,6 +1756,7 @@ p:last-child { margin-bottom: 0; }
       <a href="https://poly.engineering.asu.edu" target="_blank" rel="noopener">The Polytechnic School</a>
       <a href="https://brandguide.asu.edu" target="_blank" rel="noopener">ASU Brand Guide</a>
       <a href="https://docs.google.com/presentation/d/1kij2r-5ZVUwAoAGPLHbpGWhkOWNXuWN_/edit?usp=sharing" target="_blank" rel="noopener">Council Recommendations (PDF)</a>
+      <a href="https://canvas.asu.edu" target="_blank" rel="noopener">Canvas: Deadlines Posted Here</a>
     </div>
   </div>
   <div style="text-align:center; padding: 0 64px 16px;">
@@ -1770,7 +1771,7 @@ p:last-child { margin-bottom: 0; }
         <line x1="12" y1="18" x2="10" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
         <line x1="12" y1="18" x2="14" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
       </svg>
-      <div class="pitchfork-egg-tip">Forks up. You found it.</div>
+      <div class="pitchfork-egg-tip">Fork yeah. You found it.</div>
     </div>
   </div>
   <div class="footer-bottom">
@@ -1903,6 +1904,850 @@ p:last-child { margin-bottom: 0; }
       });
     }
   });
+<!-- ══════════ QUIZ TRIGGER (scroll-to-bottom) ══════════ -->
+<div id="quiz-trigger" style="display:none;">
+  <div class="quiz-trigger-inner">
+    <img src="https://webapp4.asu.edu/photo-ws/directory_photo/cjbledso?size=medium&break=1779396575&blankImage2=1"
+         alt="Cameron Rennacker" class="quiz-trigger-avatar">
+    <div>
+      <p class="quiz-trigger-label">Think you're ready?</p>
+      <p class="quiz-trigger-sub">Take a quick quiz to test your brief knowledge. Pass all three and earn extra credit.</p>
+      <button id="quiz-start-btn" class="quiz-cta">Take the quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ QUIZ MODAL ══════════ -->
+<div id="quiz-modal" role="dialog" aria-modal="true" aria-label="Brief knowledge quiz" style="display:none;">
+  <div class="quiz-modal-card">
+    <div class="quiz-header">
+      <span class="quiz-eyebrow">Brief knowledge check</span>
+      <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress"></div></div>
+      <span class="quiz-counter" id="quiz-counter">Question 1 of 3</span>
+    </div>
+    <div id="quiz-question-area">
+      <!-- injected by JS -->
+    </div>
+    <div class="quiz-footer-row">
+      <button id="quiz-submit-btn" class="quiz-cta" disabled>Submit answer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ QUIZ SUCCESS ══════════ -->
+<div id="quiz-success" role="dialog" aria-modal="true" style="display:none;">
+  <div class="quiz-badge-card">
+    <div class="quiz-badge-seal">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="60,8 72,36 102,36 78,55 87,84 60,66 33,84 42,55 18,36 48,36" fill="#FFC627" opacity="0.15"/>
+        <polygon points="60,14 70,38 96,38 75,55 83,80 60,64 37,80 45,55 24,38 50,38" fill="none" stroke="#FFC627" stroke-width="2"/>
+        <text x="60" y="68" text-anchor="middle" font-size="32" fill="#FFC627" font-weight="900">✓</text>
+      </svg>
+    </div>
+    <img src="https://webapp4.asu.edu/photo-ws/directory_photo/cjbledso?size=medium&break=1779396575&blankImage2=1"
+         alt="Cameron Rennacker" class="quiz-badge-avatar">
+    <div class="quiz-badge-title">Congratulations!</div>
+    <div class="quiz-badge-subtitle">You've been awarded extra credit!</div>
+    <div class="quiz-badge-msg">Take a screenshot of this badge and send it to your professor in Slack.</div>
+    <div class="quiz-badge-stamp">
+      <span class="quiz-badge-name">Brief Certified</span>
+      <span class="quiz-badge-course">GIT 450/550 · TPS ExL Initiative · Spring 2026</span>
+    </div>
+    <button id="quiz-close-success" class="quiz-cta quiz-cta--outline">Close</button>
+  </div>
+</div>
+
+<!-- ══════════ QUIZ LOCKOUT ══════════ -->
+<div id="quiz-lockout" role="dialog" aria-modal="true" style="display:none;">
+  <div class="quiz-lockout-card">
+    <img src="https://webapp4.asu.edu/photo-ws/directory_photo/cjbledso?size=medium&break=1779396575&blankImage2=1"
+         alt="Cameron Rennacker" class="quiz-trigger-avatar">
+    <p class="quiz-lockout-msg">Not quite. Go back and give the brief a thorough re-read — the answers are all in there.</p>
+    <p class="quiz-lockout-sub">You can try again in:</p>
+    <div class="quiz-countdown" id="quiz-countdown">5:00</div>
+    <button id="quiz-lockout-close" class="quiz-cta quiz-cta--outline" style="margin-top:20px;">Got it</button>
+  </div>
+</div>
+
+<style>
+/* ── QUIZ TRIGGER STRIP ── */
+#quiz-trigger {
+  background: var(--maroon); border-top: 4px solid var(--gold);
+  padding: 32px 0; position: relative; z-index: 2;
+}
+.quiz-trigger-inner {
+  max-width: 760px; margin: 0 auto; padding: 0 40px;
+  display: flex; align-items: center; gap: 24px;
+}
+.quiz-trigger-avatar {
+  width: 72px; height: 72px; border-radius: 50%; object-fit: cover;
+  border: 3px solid var(--gold); flex-shrink: 0;
+}
+.quiz-trigger-label {
+  font-family: 'Barlow Condensed', var(--font);
+  font-size: 28px; font-weight: 900; text-transform: uppercase;
+  color: var(--white); margin: 0 0 4px;
+}
+.quiz-trigger-sub {
+  font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; margin: 0 0 16px;
+}
+.quiz-cta {
+  background: var(--gold); color: var(--maroon);
+  font-family: var(--font); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.2em;
+  padding: 12px 24px; border: none; cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+.quiz-cta:hover { background: #e6b020; }
+.quiz-cta:disabled { opacity: 0.4; cursor: not-allowed; }
+.quiz-cta--outline {
+  background: transparent; border: 2px solid var(--gold);
+  color: var(--gold); margin-top: 8px;
+}
+.quiz-cta--outline:hover { background: rgba(255,198,39,0.1); }
+
+/* ── QUIZ MODAL OVERLAY ── */
+#quiz-modal, #quiz-success, #quiz-lockout {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.85);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+}
+.quiz-modal-card {
+  background: var(--white); max-width: 580px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+}
+.quiz-header {
+  background: var(--maroon); padding: 28px 32px 20px;
+  border-bottom: 3px solid var(--gold);
+}
+.quiz-eyebrow {
+  display: block; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.3em;
+  color: var(--gold); margin-bottom: 14px;
+}
+.quiz-progress-bar {
+  height: 4px; background: rgba(255,255,255,0.15);
+  margin-bottom: 10px; overflow: hidden;
+}
+.quiz-progress-fill {
+  height: 100%; background: var(--gold);
+  transition: width 0.4s ease; width: 0%;
+}
+.quiz-counter {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.2em; color: rgba(255,255,255,0.5);
+}
+#quiz-question-area { padding: 32px 32px 8px; }
+.quiz-question-text {
+  font-family: 'Barlow Condensed', var(--font);
+  font-size: clamp(18px, 3vw, 24px); font-weight: 700;
+  text-transform: uppercase; color: var(--black);
+  line-height: 1.2; margin-bottom: 24px;
+}
+/* Multiple choice */
+.quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+.quiz-option {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 16px; border: 2px solid var(--gray4);
+  cursor: pointer; transition: border-color 0.15s, background 0.15s;
+  font-size: 14px; color: var(--black); line-height: 1.4;
+  background: var(--white);
+}
+.quiz-option:hover { border-color: var(--maroon); background: var(--gold-pale); }
+.quiz-option.selected { border-color: var(--maroon); background: var(--gold-pale); }
+.quiz-option.correct { border-color: #2e7d32; background: #f1f8f1; }
+.quiz-option.wrong   { border-color: #c62828; background: #fdf1f1; }
+.quiz-option input[type="radio"],
+.quiz-option input[type="checkbox"] {
+  margin-top: 2px; flex-shrink: 0; accent-color: var(--maroon);
+}
+/* Short answer */
+.quiz-input {
+  width: 100%; padding: 12px 16px; border: 2px solid var(--gray4);
+  font-family: var(--font); font-size: 14px; color: var(--black);
+  outline: none; transition: border-color 0.2s; box-sizing: border-box;
+}
+.quiz-input:focus { border-color: var(--maroon); }
+.quiz-feedback {
+  margin-top: 14px; padding: 12px 16px;
+  font-size: 13px; font-weight: 700; line-height: 1.5; display: none;
+}
+.quiz-feedback.correct { background: #f1f8f1; color: #2e7d32; }
+.quiz-feedback.wrong   { background: #fdf1f1; color: #c62828; }
+.quiz-footer-row {
+  padding: 20px 32px 28px;
+  display: flex; justify-content: flex-end;
+}
+/* Result states on options */
+.quiz-options.revealed .quiz-option { cursor: default; pointer-events: none; }
+
+/* ── SUCCESS BADGE ── */
+.quiz-badge-card {
+  background: var(--maroon); max-width: 480px; width: 100%;
+  padding: 48px 40px; text-align: center;
+  border-top: 4px solid var(--gold); position: relative;
+  max-height: 90vh; overflow-y: auto;
+}
+.quiz-badge-seal { width: 100px; height: 100px; margin: 0 auto 12px; }
+.quiz-badge-seal svg { width: 100%; height: 100%; }
+.quiz-badge-avatar {
+  width: 80px; height: 80px; border-radius: 50%;
+  object-fit: cover; border: 3px solid var(--gold);
+  display: block; margin: 0 auto 20px;
+}
+.quiz-badge-title {
+  font-family: 'Barlow Condensed', var(--font);
+  font-size: 40px; font-weight: 900; text-transform: uppercase;
+  color: var(--gold); line-height: 1; margin-bottom: 6px;
+}
+.quiz-badge-subtitle {
+  font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 12px;
+}
+.quiz-badge-msg {
+  font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 24px;
+}
+.quiz-badge-stamp {
+  border: 2px solid rgba(255,198,39,0.4);
+  padding: 16px 24px; margin-bottom: 24px;
+}
+.quiz-badge-name {
+  display: block; font-family: 'Barlow Condensed', var(--font);
+  font-size: 22px; font-weight: 900; text-transform: uppercase;
+  color: var(--gold); letter-spacing: 0.05em;
+}
+.quiz-badge-course {
+  display: block; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.4); margin-top: 4px;
+}
+
+/* ── LOCKOUT ── */
+.quiz-lockout-card {
+  background: var(--black); max-width: 420px; width: 100%;
+  padding: 40px 36px; text-align: center;
+  border-top: 4px solid var(--maroon);
+}
+.quiz-lockout-msg {
+  font-size: 15px; color: var(--white); line-height: 1.6; margin: 16px 0 8px;
+}
+.quiz-lockout-sub {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.2em; color: rgba(255,255,255,0.4); margin: 0 0 12px;
+}
+.quiz-countdown {
+  font-family: 'Barlow Condensed', var(--font);
+  font-size: 56px; font-weight: 900; color: var(--gold); line-height: 1;
+}
+
+/* ── CAMERON EASTER EGG (Option D) ── */
+.stakeholder-avatar img.egg-ready { cursor: pointer; }
+#cameron-egg-tip {
+  display: none; position: fixed; z-index: 3000;
+  background: var(--maroon); border: 2px solid var(--gold);
+  padding: 12px 18px; max-width: 260px;
+  font-size: 13px; font-weight: 700; color: var(--gold);
+  text-align: center; line-height: 1.4;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .quiz-trigger-inner { flex-direction: column; text-align: center; gap: 16px; }
+  .quiz-modal-card, .quiz-badge-card, .quiz-lockout-card { padding: 0; }
+  .quiz-header { padding: 20px 20px 16px; }
+  #quiz-question-area { padding: 20px 20px 8px; }
+  .quiz-footer-row { padding: 16px 20px 20px; }
+  .quiz-badge-card { padding: 36px 24px; }
+  .quiz-lockout-card { padding: 32px 24px; }
+}
+</style>
+
+<script>
+(function() {
+
+// ═══════════════════════════════════════════════
+// QUESTION BANK — 30 questions, 3 randomly drawn
+// Types: 'mc' (single correct), 'multi' (multiple correct), 'short' (text match)
+// ═══════════════════════════════════════════════
+var QUESTIONS = [
+  {
+    type: 'mc',
+    q: 'What are the three goals of experiential learning at TPS?',
+    options: [
+      'Preparation, Application, Reflection',
+      'Research, Design, Testing',
+      'Ideation, Execution, Delivery',
+      'Discovery, Synthesis, Prototyping'
+    ],
+    answer: 0
+  },
+  {
+    type: 'mc',
+    q: 'How many usability testing participants are required for the digital experience deliverable?',
+    options: ['5', '8', '10', '15'],
+    answer: 2
+  },
+  {
+    type: 'mc',
+    q: 'What is the minimum number of initial concepts each team must present at Lab 4.1?',
+    options: ['1', '2', '3', '5'],
+    answer: 2
+  },
+  {
+    type: 'mc',
+    q: 'Which lab milestone is described as "pixel-perfect, every screen, every flow, every deliverable"?',
+    options: ['Lab 4.1', 'Lab 4.2', 'Lab 4.3', 'Lab 4.4'],
+    answer: 2
+  },
+  {
+    type: 'mc',
+    q: 'What type of document must be detailed enough for someone outside your team to implement the brand correctly?',
+    options: ['Site map', 'Brand guidelines document', 'Competitive analysis report', 'Usability testing report'],
+    answer: 1
+  },
+  {
+    type: 'mc',
+    q: 'The TPS EXL microsite should be designed as an extension of which existing site?',
+    options: ['poly.engineering.asu.edu', 'asu.edu', 'canvas.asu.edu', 'universitycollege.asu.edu'],
+    answer: 1
+  },
+  {
+    type: 'mc',
+    q: 'What does the final Lab 4.4 milestone focus on?',
+    options: [
+      'Client-ready presentation',
+      'Usability testing and iteration',
+      'Post-mortem report',
+      'Performance evaluations'
+    ],
+    answer: 2
+  },
+  {
+    type: 'mc',
+    q: 'How many metrics are teams evaluated on for project success?',
+    options: ['4', '5', '6', '7'],
+    answer: 2
+  },
+  {
+    type: 'mc',
+    q: 'Which success metric specifically requires that design decisions are traceable back to research findings?',
+    options: ['Creative risk', 'Strategic depth', 'Conceptual cohesion', 'Quality of execution'],
+    answer: 1
+  },
+  {
+    type: 'mc',
+    q: 'What does the EXL Council identify as a short-term priority for branding and communications?',
+    options: [
+      'Build a new named building',
+      'Develop EXL branding and communications strategies',
+      'Fund collaborative faculty cohorts',
+      'Create mini-grants for faculty'
+    ],
+    answer: 1
+  },
+  {
+    type: 'mc',
+    q: 'Which institution is used as a primary reference for having a distinct identity within a large university?',
+    options: ['MIT Media Lab', 'Cal Poly', 'Stanford d.school', 'Olin College of Engineering'],
+    answer: 2
+  },
+  {
+    type: 'mc',
+    q: 'How many peer institutions must each team research for the competitive analysis?',
+    options: ['3 to 5', '5 to 7', '7 to 10', 'At least 10'],
+    answer: 1
+  },
+  {
+    type: 'mc',
+    q: 'What must recording submissions be submitted to by 11:59 PM on the due date for Lab 4.1?',
+    options: ['Google Drive', 'Canvas', 'Box Drive', 'Slack'],
+    answer: 2
+  },
+  {
+    type: 'mc',
+    q: 'What event does the council recommend hosting at the start of Fall semester to celebrate EXL?',
+    options: ['EXL Showcase and Awards Ceremony', 'ExL and AI Showcase', 'TPS Open House', 'Faculty Summit'],
+    answer: 1
+  },
+  {
+    type: 'mc',
+    q: 'According to the brief, what is NOT a valid form of experiential learning at TPS?',
+    options: ['Internships', 'Capstone projects', 'Online lectures only', 'Service learning'],
+    answer: 2
+  },
+  {
+    type: 'mc',
+    q: 'Which SWOT category includes "fragmented approach across programs" and "no dedicated leadership"?',
+    options: ['Strengths', 'Weaknesses', 'Opportunities', 'Threats'],
+    answer: 1
+  },
+  {
+    type: 'mc',
+    q: 'Which SWOT category includes "new industrial park location" and "corporate sponsorships"?',
+    options: ['Strengths', 'Weaknesses', 'Opportunities', 'Threats'],
+    answer: 2
+  },
+  {
+    type: 'mc',
+    q: 'What does the "creative risk" success metric require teams to be able to identify?',
+    options: [
+      'Three peer institutions doing the same thing',
+      'One creative decision that pushed beyond the expected solution',
+      'A budget for experimental materials',
+      'A faculty mentor who approved the concept'
+    ],
+    answer: 1
+  },
+  {
+    type: 'mc',
+    q: 'What format does the final project deliverable take?',
+    options: [
+      'Written report submitted to Canvas',
+      'Client-ready presentation to the TPS ExL Council',
+      'Recorded video walkthrough',
+      'Figma prototype shared via link'
+    ],
+    answer: 1
+  },
+  {
+    type: 'mc',
+    q: 'According to the brief, what does a faculty member opening your Figma file should feel?',
+    options: ['Impressed', 'Challenged', 'Relief', 'Confused'],
+    answer: 2
+  },
+  {
+    type: 'mc',
+    q: 'What long-term vision does the council have for a dedicated physical space at TPS?',
+    options: [
+      'A renovated library',
+      'A shared coworking space with ASU Downtown',
+      'An EXL Center with a director and staff',
+      'A virtual collaboration platform'
+    ],
+    answer: 2
+  },
+  {
+    type: 'mc',
+    q: 'Who are the four primary audience personas that must be developed?',
+    options: [
+      'Students, parents, donors, alumni',
+      'Prospective students, current students, faculty, industry partners',
+      'Freshmen, sophomores, juniors, seniors',
+      'Faculty, staff, administrators, employers'
+    ],
+    answer: 1
+  },
+  {
+    type: 'mc',
+    q: 'What should the student journey map begin with?',
+    options: [
+      'First day of class',
+      'Selecting a major',
+      'First learning about TPS',
+      'Applying to ASU'
+    ],
+    answer: 2
+  },
+  {
+    type: 'mc',
+    q: 'What does "conceptual cohesion" mean as a success metric?',
+    options: [
+      'All team members agree on the concept',
+      'A reviewer unfamiliar with the brief can describe the brand consistently from any single deliverable',
+      'The concept uses consistent fonts and colors',
+      'The concept references the same three sources throughout'
+    ],
+    answer: 1
+  },
+  {
+    type: 'mc',
+    q: 'What is the role of the student journey map in the strategy deliverables?',
+    options: [
+      'To track weekly team progress',
+      'To map the complete student experience from first learning about TPS through graduation',
+      'To document usability testing sessions',
+      'To visualize the information architecture of the microsite'
+    ],
+    answer: 1
+  },
+  {
+    type: 'multi',
+    q: 'Which of the following are listed as required deliverables? Select all that apply.',
+    options: [
+      'Competitive analysis report',
+      'Brand guidelines document',
+      'Social media content calendar',
+      'Usability testing report',
+      'TV commercial concept'
+    ],
+    answers: [0, 1, 3]
+  },
+  {
+    type: 'multi',
+    q: 'Which of the following are listed as short-term priorities by the ExL Council? Select all that apply.',
+    options: [
+      'Hire a TPS Associate Director for ExL',
+      'Build a new named building',
+      'Develop ExL workshops for faculty',
+      'Fund collaborative faculty cohorts',
+      'Launch a graduate program in ExL'
+    ],
+    answers: [0, 2, 3]
+  },
+  {
+    type: 'multi',
+    q: 'Which of the following are valid experiential learning models at TPS? Select all that apply.',
+    options: [
+      'Internships',
+      'Passive lecture attendance',
+      'Co-ops',
+      'Service learning',
+      'Independent study with no reflection component'
+    ],
+    answers: [0, 2, 3]
+  },
+  {
+    type: 'short',
+    q: 'In your own words, what is the three-word cycle that defines the EXL process at TPS? (Separate with commas)',
+    keywords: ['preparation', 'application', 'reflection'],
+    hint: 'It is the three goals listed in the brief.'
+  },
+  {
+    type: 'short',
+    q: 'What must every design decision in this project be traceable back to?',
+    keywords: ['research', 'findings', 'data', 'insight'],
+    hint: 'The brief states this explicitly in the strategic depth metric.'
+  }
+];
+
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+var LOCKOUT_MINUTES = 5;
+var STORAGE_KEY_LOCKOUT  = 'tps_quiz_lockout_until';
+var STORAGE_KEY_CREDITED = 'tps_quiz_credited';
+var quizQuestions = [];
+var currentQ = 0;
+var score = 0;
+var selectedAnswers = [];
+var lockoutTimer = null;
+
+// ── DOM refs ──
+var triggerEl    = document.getElementById('quiz-trigger');
+var startBtn     = document.getElementById('quiz-start-btn');
+var modalEl      = document.getElementById('quiz-modal');
+var successEl    = document.getElementById('quiz-success');
+var lockoutEl    = document.getElementById('quiz-lockout');
+var questionArea = document.getElementById('quiz-question-area');
+var progressFill = document.getElementById('quiz-progress');
+var counterEl    = document.getElementById('quiz-counter');
+var submitBtn    = document.getElementById('quiz-submit-btn');
+var countdownEl  = document.getElementById('quiz-countdown');
+
+// ── Scroll-to-bottom trigger ──
+var triggered = false;
+function checkScroll() {
+  if (triggered) return;
+  var scrollBottom = window.scrollY + window.innerHeight;
+  var docHeight = document.documentElement.scrollHeight;
+  if (scrollBottom >= docHeight - 80) {
+    triggered = true;
+    triggerEl.style.display = 'block';
+    window.removeEventListener('scroll', checkScroll);
+  }
+}
+window.addEventListener('scroll', checkScroll, { passive: true });
+
+// ── Shuffle helper ──
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+
+// ── Draw 3 random questions ──
+function drawQuestions() {
+  quizQuestions = shuffle(QUESTIONS).slice(0, 3);
+}
+
+// ── Check lockout ──
+function isLockedOut() {
+  try {
+    var until = parseInt(localStorage.getItem(STORAGE_KEY_LOCKOUT) || '0');
+    return Date.now() < until;
+  } catch(e) { return false; }
+}
+function getLockoutRemaining() {
+  try {
+    var until = parseInt(localStorage.getItem(STORAGE_KEY_LOCKOUT) || '0');
+    return Math.max(0, until - Date.now());
+  } catch(e) { return 0; }
+}
+function setLockout() {
+  try {
+    localStorage.setItem(STORAGE_KEY_LOCKOUT, Date.now() + LOCKOUT_MINUTES * 60 * 1000);
+  } catch(e) {}
+}
+function hasEarnedCredit() {
+  try { return !!localStorage.getItem(STORAGE_KEY_CREDITED); } catch(e) { return false; }
+}
+function markCredited() {
+  try { localStorage.setItem(STORAGE_KEY_CREDITED, '1'); } catch(e) {}
+}
+
+// ── Start quiz ──
+startBtn.addEventListener('click', function() {
+  if (isLockedOut()) { showLockout(); return; }
+  drawQuestions();
+  currentQ = 0;
+  score = 0;
+  modalEl.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  renderQuestion();
+});
+
+// ── Render a question ──
+function renderQuestion() {
+  var q = quizQuestions[currentQ];
+  var pct = (currentQ / 3) * 100;
+  progressFill.style.width = pct + '%';
+  counterEl.textContent = 'Question ' + (currentQ + 1) + ' of 3';
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submit answer';
+  selectedAnswers = [];
+
+  var html = '<p class="quiz-question-text">' + q.q + '</p>';
+
+  if (q.type === 'mc') {
+    html += '<div class="quiz-options" id="quiz-opts">';
+    q.options.forEach(function(opt, i) {
+      html += '<label class="quiz-option" data-idx="' + i + '">' +
+        '<input type="radio" name="qopt" value="' + i + '"> ' + opt +
+        '</label>';
+    });
+    html += '</div>';
+  } else if (q.type === 'multi') {
+    html += '<p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--gray2);margin-bottom:12px;">Select all that apply</p>';
+    html += '<div class="quiz-options" id="quiz-opts">';
+    q.options.forEach(function(opt, i) {
+      html += '<label class="quiz-option" data-idx="' + i + '">' +
+        '<input type="checkbox" name="qopt" value="' + i + '"> ' + opt +
+        '</label>';
+    });
+    html += '</div>';
+  } else if (q.type === 'short') {
+    html += '<input type="text" class="quiz-input" id="quiz-short-input" placeholder="Type your answer..." autocomplete="off">';
+    if (q.hint) {
+      html += '<p style="font-size:11px;color:var(--gray2);margin-top:8px;font-style:normal;">Hint: ' + q.hint + '</p>';
+    }
+  }
+
+  html += '<div class="quiz-feedback" id="quiz-fb"></div>';
+  questionArea.innerHTML = html;
+
+  // Wire up answer selection
+  if (q.type === 'mc') {
+    document.querySelectorAll('#quiz-opts .quiz-option').forEach(function(label) {
+      label.addEventListener('click', function() {
+        document.querySelectorAll('#quiz-opts .quiz-option').forEach(function(l) { l.classList.remove('selected'); });
+        label.classList.add('selected');
+        label.querySelector('input').checked = true;
+        selectedAnswers = [parseInt(label.dataset.idx)];
+        submitBtn.disabled = false;
+      });
+    });
+  } else if (q.type === 'multi') {
+    document.querySelectorAll('#quiz-opts input[type="checkbox"]').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        cb.closest('.quiz-option').classList.toggle('selected', cb.checked);
+        selectedAnswers = [];
+        document.querySelectorAll('#quiz-opts input[type="checkbox"]:checked').forEach(function(c) {
+          selectedAnswers.push(parseInt(c.value));
+        });
+        submitBtn.disabled = selectedAnswers.length === 0;
+      });
+    });
+  } else if (q.type === 'short') {
+    var input = document.getElementById('quiz-short-input');
+    input.addEventListener('input', function() {
+      submitBtn.disabled = input.value.trim().length < 2;
+    });
+  }
+}
+
+// ── Submit answer ──
+submitBtn.addEventListener('click', function() {
+  if (submitBtn.textContent === 'Next question' || submitBtn.textContent === 'See results') {
+    currentQ++;
+    if (currentQ < 3) {
+      renderQuestion();
+    } else {
+      finishQuiz();
+    }
+    return;
+  }
+
+  var q = quizQuestions[currentQ];
+  var correct = false;
+  var fb = document.getElementById('quiz-fb');
+  var opts = document.getElementById('quiz-opts');
+
+  if (q.type === 'mc') {
+    correct = selectedAnswers[0] === q.answer;
+    if (opts) {
+      opts.classList.add('revealed');
+      opts.querySelectorAll('.quiz-option').forEach(function(label) {
+        var idx = parseInt(label.dataset.idx);
+        if (idx === q.answer) label.classList.add('correct');
+        else if (selectedAnswers.indexOf(idx) > -1) label.classList.add('wrong');
+      });
+    }
+    fb.className = 'quiz-feedback ' + (correct ? 'correct' : 'wrong');
+    fb.textContent = correct
+      ? 'Correct.'
+      : 'Not quite. The correct answer is: ' + q.options[q.answer];
+    fb.style.display = 'block';
+  } else if (q.type === 'multi') {
+    var sortedSel = selectedAnswers.slice().sort().join(',');
+    var sortedAns = q.answers.slice().sort().join(',');
+    correct = sortedSel === sortedAns;
+    if (opts) {
+      opts.classList.add('revealed');
+      opts.querySelectorAll('.quiz-option').forEach(function(label) {
+        var idx = parseInt(label.dataset.idx);
+        var isCorrectChoice = q.answers.indexOf(idx) > -1;
+        var wasSelected = selectedAnswers.indexOf(idx) > -1;
+        if (isCorrectChoice) label.classList.add('correct');
+        else if (wasSelected) label.classList.add('wrong');
+      });
+    }
+    fb.className = 'quiz-feedback ' + (correct ? 'correct' : 'wrong');
+    fb.textContent = correct
+      ? 'Correct.'
+      : 'Not quite. The correct answers were: ' + q.answers.map(function(i) { return q.options[i]; }).join(', ');
+    fb.style.display = 'block';
+  } else if (q.type === 'short') {
+    var val = document.getElementById('quiz-short-input').value.toLowerCase().trim();
+    correct = q.keywords.some(function(kw) { return val.indexOf(kw.toLowerCase()) > -1; });
+    fb.className = 'quiz-feedback ' + (correct ? 'correct' : 'wrong');
+    fb.textContent = correct
+      ? 'Good answer.'
+      : 'Not quite. Think about: ' + q.keywords.join(', ') + '.';
+    fb.style.display = 'block';
+    document.getElementById('quiz-short-input').disabled = true;
+  }
+
+  if (correct) score++;
+  submitBtn.disabled = false;
+  submitBtn.textContent = currentQ < 2 ? 'Next question' : 'See results';
+});
+
+// ── Finish quiz ──
+function finishQuiz() {
+  modalEl.style.display = 'none';
+  if (score === 3) {
+    markCredited();
+    progressFill.style.width = '100%';
+    successEl.style.display = 'flex';
+  } else {
+    setLockout();
+    modalEl.style.display = 'none';
+    showLockout();
+  }
+}
+
+// ── Lockout screen ──
+function showLockout() {
+  lockoutEl.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  runCountdown();
+}
+function runCountdown() {
+  if (lockoutTimer) clearInterval(lockoutTimer);
+  lockoutTimer = setInterval(function() {
+    var rem = getLockoutRemaining();
+    if (rem <= 0) {
+      clearInterval(lockoutTimer);
+      countdownEl.textContent = '0:00';
+      document.getElementById('quiz-lockout-close').textContent = 'Try again';
+      return;
+    }
+    var m = Math.floor(rem / 60000);
+    var s = Math.floor((rem % 60000) / 1000);
+    countdownEl.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+  }, 500);
+}
+document.getElementById('quiz-lockout-close').addEventListener('click', function() {
+  if (!isLockedOut()) {
+    lockoutEl.style.display = 'none';
+    document.body.style.overflow = '';
+    if (lockoutTimer) clearInterval(lockoutTimer);
+  } else {
+    // Encourage them while still locked
+    countdownEl.style.color = '#e6b020';
+    setTimeout(function() { countdownEl.style.color = ''; }, 400);
+  }
+});
+
+// ── Success close ──
+document.getElementById('quiz-close-success').addEventListener('click', function() {
+  successEl.style.display = 'none';
+  document.body.style.overflow = '';
+  // Update trigger text if already credited
+  if (hasEarnedCredit()) {
+    startBtn.textContent = 'Take it again';
+  }
+});
+
+// ── If returning with credit already earned, update button label ──
+if (hasEarnedCredit()) {
+  // Don't block retakes — just change label
+  if (startBtn) startBtn.textContent = 'Take it again';
+}
+
+// ── Close quiz modal on backdrop click ──
+modalEl.addEventListener('click', function(e) {
+  if (e.target === modalEl) {
+    modalEl.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+});
+
+// ═══════════════════════════════════════════════
+// CAMERON EASTER EGG (Option D)
+// Triple-click Cameron's stakeholder photo
+// ═══════════════════════════════════════════════
+var eggTip = document.createElement('div');
+eggTip.id = 'cameron-egg-tip';
+eggTip.textContent = "That's the instructor. He wrote this brief. No pressure.";
+document.body.appendChild(eggTip);
+
+var cameronImgs = document.querySelectorAll('.stakeholder-avatar img');
+cameronImgs.forEach(function(img) {
+  if (img.src && img.src.indexOf('cjbledso') > -1) {
+    img.classList.add('egg-ready');
+    var clicks = 0;
+    var clickTimer = null;
+    img.addEventListener('click', function(e) {
+      clicks++;
+      if (clickTimer) clearTimeout(clickTimer);
+      clickTimer = setTimeout(function() { clicks = 0; }, 600);
+      if (clicks >= 3) {
+        clicks = 0;
+        var rect = img.getBoundingClientRect();
+        eggTip.style.display = 'block';
+        eggTip.style.top = (rect.top + window.scrollY - eggTip.offsetHeight - 12) + 'px';
+        eggTip.style.left = (rect.left + rect.width / 2 - 130) + 'px';
+        setTimeout(function() { eggTip.style.display = 'none'; }, 3500);
+      }
+    });
+  }
+});
+
 })();
 </script>
 </body>

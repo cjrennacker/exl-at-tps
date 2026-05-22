@@ -769,6 +769,149 @@ p:last-child { margin-bottom: 0; }
   font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
   color: rgba(255,255,255,0.25);
 }
+
+/* ═══════════════════════════════════
+   MOBILE-FIRST RESPONSIVE ADDITIONS
+   ═══════════════════════════════════ */
+
+/* ── NAV: touch-friendly dropdown ── */
+.site-nav > li > button[aria-expanded="true"] + .nav-dropdown,
+.site-nav > li > button[aria-expanded="true"] + ul.nav-dropdown {
+  display: block;
+}
+
+@media (max-width: 960px) {
+  /* Nav becomes tap-to-open instead of hover */
+  .site-nav > li:hover .nav-dropdown,
+  .site-nav > li:focus-within .nav-dropdown {
+    display: none; /* disable hover on mobile */
+  }
+  .site-nav > li > button[aria-expanded="true"] + .nav-dropdown,
+  .site-nav > li > button[aria-expanded="true"] + ul.nav-dropdown {
+    display: block;
+  }
+  .nav-dropdown {
+    position: static !important;
+    width: 100%; border-top: 2px solid;
+    box-shadow: none; min-width: 0;
+    padding: 4px 0;
+  }
+  .nav-dropdown li a {
+    padding: 10px 16px; font-size: 12px;
+  }
+}
+
+/* ── LOADER: prevent phrase height jumping ── */
+#loader-main {
+  width: min(480px, 90vw) !important;
+  padding: 0 20px !important;
+}
+.loader-phrase {
+  min-height: 2.4em !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* ── HERO: single-column on small screens ── */
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr !important; min-height: auto !important; }
+  .hero-text { padding: 72px 24px 60px !important; }
+  .hero-visual, .hero-image { min-height: 280px; }
+  .hero-visual-inner { padding: 40px 24px !important; gap: 20px !important; }
+  .hero-stat-number { font-size: 36px !important; }
+}
+
+/* ── RESPONSIVE TABLE: card layout on mobile ── */
+@media (max-width: 640px) {
+  .comp-table, .comp-table thead,
+  .comp-table tbody, .comp-table th,
+  .comp-table td, .comp-table tr {
+    display: block;
+    width: 100%;
+  }
+  .comp-table thead { display: none; }
+  .comp-table tr {
+    margin-bottom: 16px;
+    border: 1px solid var(--gray4, rgba(255,255,255,0.1));
+    padding: 16px;
+  }
+  .comp-table td {
+    border: none !important;
+    padding: 8px 0 !important;
+    font-size: 13px;
+  }
+  .comp-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    opacity: 0.5; margin-bottom: 4px;
+  }
+  /* comp-aside hide on mobile — not enough room */
+  .comp-aside { display: none !important; }
+}
+
+/* ── GRIDS: smaller breakpoint catch-all ── */
+@media (max-width: 600px) {
+  .swot-grid { grid-template-columns: 1fr !important; gap: 2px !important; }
+  .rec-grid  { grid-template-columns: 1fr !important; }
+  .del-grid  { grid-template-columns: 1fr !important; }
+  .metrics-grid { grid-template-columns: 1fr !important; }
+  .formats-grid { grid-template-columns: 1fr !important; }
+  .brand-grid   { grid-template-columns: 1fr !important; }
+  .artist-grid  { grid-template-columns: 1fr !important; }
+  .assets-grid  { grid-template-columns: 1fr !important; }
+  .two-col, .two-col--60 { grid-template-columns: 1fr !important; }
+  .stakeholder-grid { grid-template-columns: 1fr !important; }
+
+  /* Section padding reduction */
+  .section, section { padding: 56px 0 !important; }
+  .container, .container--narrow { padding: 0 20px !important; }
+
+  /* Typography scale */
+  h2 { font-size: clamp(28px, 8vw, 44px) !important; }
+  .hero-headline { font-size: clamp(40px, 12vw, 72px) !important; }
+
+  /* ExL cycle stacks */
+  .exl-cycle, .ExL-cycle {
+    grid-template-columns: 1fr !important;
+    padding: 40px 20px !important;
+  }
+  .exl-cycle-arrow, .ExL-cycle-arrow { display: none !important; }
+
+  /* Photo stacks */
+  .exl-photo-stack { margin-bottom: 40px !important; }
+  .exl-photo-accent { display: none !important; }
+  .exl-photo-main { height: 240px !important; }
+  .artist-images img { height: auto !important; }
+
+  /* Brand story */
+  .brand-story-grid { grid-template-columns: 1fr !important; }
+  .brand-story-images { display: none; } /* hide decorative stacked photos on tiny screens */
+
+  /* Timeline */
+  .timeline-item { grid-template-columns: 80px 32px 1fr !important; }
+  .timeline-label { font-size: 10px !important; padding: 18px 12px 18px 0 !important; }
+
+  /* Footer */
+  .footer-inner { flex-direction: column; padding: 0 20px !important; }
+  .footer-bottom { padding: 20px 20px 0 !important; }
+
+  /* Loader success text */
+  .loader-success-text { font-size: 28px !important; }
+}
+
+/* ── VERY SMALL: 390px and under ── */
+@media (max-width: 390px) {
+  .hero-text { padding: 56px 16px 48px !important; }
+  .container, .container--narrow { padding: 0 16px !important; }
+  .timeline-item { grid-template-columns: 60px 28px 1fr !important; }
+  .timeline-label { font-size: 9px !important; }
+  .hero-tags { gap: 6px !important; }
+  .hero-tag { font-size: 9px !important; padding: 4px 10px !important; }
+}
 </style>
 </head>
 <body>
@@ -977,7 +1120,7 @@ p:last-child { margin-bottom: 0; }
     <div class="two-col two-col--60">
       <div>
         <span class="eyebrow">About the client</span>
-        <h2>The Polytechnic School.</h2>
+        <h2>The Polytechnic School at ASU.</h2>
         <div class="gold-line"></div>
         <p>The Polytechnic School (TPS) at Arizona State University is home to programs across engineering technology, computing, graphic information technology, and applied sciences. Experiential learning already happens across many of its programs, expressed through doing, reflecting, and applying.</p>
         <p>But it happens inconsistently, under different names, with different levels of recognition, and without a unified story. The Experiential Learning Council has spent two semesters defining what ExL means at TPS. Now, they need your help bringing that vision to life.</p>
@@ -1020,7 +1163,7 @@ p:last-child { margin-bottom: 0; }
     <div class="two-col two-col--60">
       <div>
         <span class="eyebrow" style="color:var(--maroon);">What is experiential learning?</span>
-        <h2>Learning by doing, and thinking about what you did.</h2>
+        <h2>Learn by doing, and thinking about what you did.</h2>
         <div class="maroon-line"></div>
         <p>Experiential learning is defined as learning from experience: learning by doing and then reflecting on it. Skills and knowledge are acquired through firsthand experiences rather than passive instruction. At TPS, this includes internships, capstone projects, co-ops, research, field practicums, service learning, and hands-on lab work across every program.</p>
         <p>What makes TPS's approach distinct is the insistence on pairing practice with reflection (Principled Innovation<sup>™</sup>). Doing something is not enough. Students are expected to think critically about what they did, what they learned, and how it connects to theory and future practice. That cycle (doing, reflecting, applying) is the engine of ExL @ TPS.</p>
@@ -1038,8 +1181,8 @@ p:last-child { margin-bottom: 0; }
       </div>
       <div>
         <div class="ExL-photo-stack">
-          <img src="images/251024 ASU Polytechnic Campus - Dreamscape Class DP7A0287 - PP .jpg"
-               alt="Dreamscape class at ASU Polytechnic Campus" class="ExL-photo-main">
+          <img src="images/240409 ASU Outstanding Graduates - Spring 2024 - Day 3 DP7A8270 - SM .jpg"
+               alt="Outstanding Graduates 2024" class="ExL-photo-main">
           <img src="images/251021 ASU Polytechnic - Horticulture Lab DP7A9927 AES.jpg"
                alt="Horticulture lab at ASU Polytechnic" class="ExL-photo-accent">
         </div>
@@ -1322,46 +1465,46 @@ p:last-child { margin-bottom: 0; }
       </thead>
       <tbody>
         <tr>
-          <td>
+          <td data-label="Institution">
             <div class="comp-name">Stanford d.school</div>
             <a href="https://dschool.stanford.edu" target="_blank" rel="noopener" class="comp-url">dschool.stanford.edu →</a>
             <div><span class="comp-tag">Primary</span></div>
           </td>
-          <td>Design thinking methodology, distinct identity within a large university, how a center becomes a movement<span class="comp-aside">Notice how the d.school has its own brand inside Stanford's. That's the model.</span></td>
-          <td>Research this yourself. Your team's observations carry more weight here.</td>
+          <td data-label="What to study">Design thinking methodology, distinct identity within a large university, how a center becomes a movement<span class="comp-aside">Notice how the d.school has its own brand inside Stanford's. That's the model.</span></td>
+          <td data-label="Where the gap likely is">Research this yourself. Your team's observations carry more weight here.</td>
         </tr>
         <tr>
-          <td>
+          <td data-label="Institution">
             <div class="comp-name">MIT Media Lab</div>
             <a href="https://www.media.mit.edu" target="_blank" rel="noopener" class="comp-url">media.mit.edu →</a>
             <div><span class="comp-tag">Primary</span></div>
           </td>
-          <td>Research-to-practice pipeline, faculty and industry collaboration storytelling, prestige positioning<span class="comp-aside">How do they make research feel accessible to prospective students? Study that.</span></td>
-          <td>Research this yourself. Your team's observations carry more weight here.</td>
+          <td data-label="What to study">Research-to-practice pipeline, faculty and industry collaboration storytelling, prestige positioning<span class="comp-aside">How do they make research feel accessible to prospective students? Study that.</span></td>
+          <td data-label="Where the gap likely is">Research this yourself. Your team's observations carry more weight here.</td>
         </tr>
         <tr>
-          <td>
+          <td data-label="Institution">
             <div class="comp-name">Olin College of Engineering</div>
             <a href="https://www.olin.edu" target="_blank" rel="noopener" class="comp-url">olin.edu →</a>
           </td>
-          <td>Full-institution commitment to project-based learning, how they recruit students who want this, culture-first communication<span class="comp-aside">Olin built ExL into its DNA. TPS is building ExL into an existing institution. Different problem.</span></td>
-          <td>Research this yourself. Your team's observations carry more weight here.</td>
+          <td data-label="What to study">Full-institution commitment to project-based learning, how they recruit students who want this, culture-first communication<span class="comp-aside">Olin built ExL into its DNA. TPS is building ExL into an existing institution. Different problem.</span></td>
+          <td data-label="Where the gap likely is">Research this yourself. Your team's observations carry more weight here.</td>
         </tr>
         <tr>
-          <td>
+          <td data-label="Institution">
             <div class="comp-name">Georgia Tech VIP Program</div>
             <a href="https://www.vip.gatech.edu" target="_blank" rel="noopener" class="comp-url">vip.gatech.edu →</a>
           </td>
-          <td>Scalable ExL model across programs, how they communicate multi-year student involvement, industry integration<span class="comp-aside">The VIP model is replicable. Is there something similar that could work at TPS?</span></td>
-          <td>Research this yourself. Your team's observations carry more weight here.</td>
+          <td data-label="What to study">Scalable ExL model across programs, how they communicate multi-year student involvement, industry integration<span class="comp-aside">The VIP model is replicable. Is there something similar that could work at TPS?</span></td>
+          <td data-label="Where the gap likely is">Research this yourself. Your team's observations carry more weight here.</td>
         </tr>
         <tr>
-          <td>
+          <td data-label="Institution">
             <div class="comp-name">Cal Poly</div>
             <a href="https://www.calpoly.edu" target="_blank" rel="noopener" class="comp-url">calpoly.edu →</a>
           </td>
-          <td>"Learn by doing" brand equity, how they own a phrase institutionally, applied science and technology identity<span class="comp-aside">TPS's peer in applied programs. What does Cal Poly do that TPS hasn't claimed yet?</span></td>
-          <td>Research this yourself. Your team's observations carry more weight here.</td>
+          <td data-label="What to study">"Learn by doing" brand equity, how they own a phrase institutionally, applied science and technology identity<span class="comp-aside">TPS's peer in applied programs. What does Cal Poly do that TPS hasn't claimed yet?</span></td>
+          <td data-label="Where the gap likely is">Research this yourself. Your team's observations carry more weight here.</td>
         </tr>
       </tbody>
     </table>
@@ -1613,7 +1756,6 @@ p:last-child { margin-bottom: 0; }
       <a href="https://poly.engineering.asu.edu" target="_blank" rel="noopener">The Polytechnic School</a>
       <a href="https://brandguide.asu.edu" target="_blank" rel="noopener">ASU Brand Guide</a>
       <a href="https://docs.google.com/presentation/d/1kij2r-5ZVUwAoAGPLHbpGWhkOWNXuWN_/edit?usp=sharing" target="_blank" rel="noopener">Council Recommendations (PDF)</a>
-      <a href="https://canvas.asu.edu" target="_blank" rel="noopener">Canvas: Deadlines Posted Here</a>
     </div>
   </div>
   <div style="text-align:center; padding: 0 64px 16px;">
@@ -1628,7 +1770,7 @@ p:last-child { margin-bottom: 0; }
         <line x1="12" y1="18" x2="10" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
         <line x1="12" y1="18" x2="14" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
       </svg>
-      <div class="pitchfork-egg-tip">Fork yeah. You found it.</div>
+      <div class="pitchfork-egg-tip">Forks up. You found it.</div>
     </div>
   </div>
   <div class="footer-bottom">
@@ -1735,6 +1877,32 @@ p:last-child { margin-bottom: 0; }
   }
   window.addEventListener('scroll', updateNav, { passive: true });
   updateNav();
+
+  // ── MOBILE NAV: tap-to-toggle dropdowns ──
+  document.querySelectorAll('.site-nav > li > button').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.site-nav > li > button[aria-expanded="true"]').forEach(function(other) {
+        if (other !== btn) other.setAttribute('aria-expanded', 'false');
+      });
+      btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    });
+  });
+  document.querySelectorAll('.nav-dropdown a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.querySelectorAll('.site-nav > li > button').forEach(function(b) {
+        b.setAttribute('aria-expanded', 'false');
+      });
+    });
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.site-nav')) {
+      document.querySelectorAll('.site-nav > li > button').forEach(function(b) {
+        b.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
 })();
 </script>
 </body>

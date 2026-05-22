@@ -2685,15 +2685,9 @@ function runCountdown() {
   }, 500);
 }
 document.getElementById('quiz-lockout-close').addEventListener('click', function() {
-  if (!isLockedOut()) {
-    lockoutEl.style.display = 'none';
-    document.body.style.overflow = '';
-    if (lockoutTimer) clearInterval(lockoutTimer);
-  } else {
-    // Encourage them while still locked
-    countdownEl.style.color = '#e6b020';
-    setTimeout(function() { countdownEl.style.color = ''; }, 400);
-  }
+  lockoutEl.style.display = 'none';
+  document.body.style.overflow = '';
+  if (lockoutTimer) clearInterval(lockoutTimer);
 });
 
 // ── Success close ──
@@ -2726,7 +2720,7 @@ modalEl.addEventListener('click', function(e) {
 // ═══════════════════════════════════════════════
 var eggTip = document.createElement('div');
 eggTip.id = 'cameron-egg-tip';
-eggTip.textContent = "That's your professor. He wrote this brief. No pressure.";
+eggTip.textContent = "That's the instructor. He wrote this brief. No pressure.";
 document.body.appendChild(eggTip);
 
 var cameronImgs = document.querySelectorAll('.stakeholder-avatar img');

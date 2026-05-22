@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creative Brief: TPS Experiential Learning Initiative | GIT 450/550</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<style>
+
+/* ── ASU BRAND TOKENS ── */
+/* ── SKIP LINK (accessibility) ── */
+/* ── EASTER EGG: PITCHFORK ── */
+.pitchfork-egg {
+  position: relative; display: inline-flex; align-items: center;
+  cursor: default; margin-top: 16px;
+}
+.pitchfork-egg svg {
+  width: 24px; height: 24px; opacity: 0.15;
+  fill: rgba(255,255,255,0.3);
+  transition: opacity 0.4s, fill 0.4s, transform 0.4s;
+}
+.pitchfork-egg:hover svg { opacity: 1; fill: var(--gold); transform: translateY(-4px); }
+.pitchfork-egg-tip {
+  position: absolute; bottom: calc(100% + 10px); left: 50%;
+  transform: translateX(-50%);
+  background: var(--black); border: 1px solid var(--gold);
+  padding: 8px 14px; white-space: nowrap; font-size: 12px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--gold); opacity: 0; pointer-events: none;
+  transition: opacity 0.3s; box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+.pitchfork-egg-tip::after {
+  content: ''; position: absolute; top: 100%; left: 50%;
+  transform: translateX(-50%); border: 5px solid transparent;
+  border-top-color: var(--gold);
+}
+.pitchfork-egg:hover .pitchfork-egg-tip { opacity: 1; }
+
+/* ── EASTER EGG: KONAMI ── */
+#konami-overlay {
+  display: none; position: fixed; inset: 0; z-index: 9998;
+  background: var(--maroon); align-items: center; justify-content: center;
+  flex-direction: column;
+}
+#konami-overlay.active { display: flex; }
+#konami-msg {
+  font-family: "Barlow Condensed", var(--font);
+  font-size: clamp(32px, 6vw, 64px); font-weight: 900;
+  text-transform: uppercase; color: var(--gold); text-align: center;
+  letter-spacing: -0.01em; line-height: 1.1;
+}
+#konami-sub {
+  font-size: 13px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.25em; color: rgba(255,255,255,0.5); margin-top: 16px;
+}
+
+.skip-link {
+  position: absolute; top: -40px; left: 0; z-index: 10000;
+  background: var(--gold); color: var(--maroon);
+  padding: 8px 16px; font-weight: 700; font-size: 13px;
+  text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+/* ── FOCUS STYLES ── */
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+button:focus-visible, a:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+:root {
+  --maroon:     #8C1D40;
+  --maroon-dark:#6b1530;
+  --maroon-deep:#4a0e22;
+  --gold:       #FFC627;
+  --gold-dark:  #e6b020;
+  --gold-pale:  #fff8e1;
+  --black:      #191919;
+  --gray1:      #484848;
+  --gray2:      #747474;
+  --gray3:      #BFBFBF;
+  --gray4:      #E8E8E8;
+  --gray5:      #FAFAFA;
+  --white:      #FFFFFF;
+  --font:       Arial, Helvetica, "Nimbus Sans L", "Liberation Sans", FreeSans, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--white);
+  color: var(--black);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── LOADER ── */
+#page-loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--maroon);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#page-loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+#loader-main {
+  display: flex; flex-direction: column; align-items: center;
+  width: 480px; padding: 0 16px;
+}
+.loader-fork {
+  width: 64px; height: 64px;
+  animation: fork-bob 0.5s ease-in-out infinite alternate;
+}
+.loader-fork svg { width: 100%; height: 100%; fill: var(--gold); display: block; }
+@keyframes fork-bob {
+  0%   { transform: translateY(0) rotate(-5deg); }
+  100% { transform: translateY(-8px) rotate(5deg); }
+}
+.loader-hang {
+  font-family: var(--font); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.5); margin-top: 28px;
+}
+.loader-phrase {
+  font-family: var(--font); font-size: clamp(13px, 2.2vw, 18px);
+  font-weight: 700; color: var(--gold);
+  margin-top: 10px; min-height: 36px;
+  text-align: center; text-transform: uppercase; letter-spacing: 0.05em;
+  transition: opacity 0.4s ease;
+}
+.loader-phrase.fade-out { opacity: 0; }
+.loader-phrase.fade-in  { opacity: 1; }
+.loader-dots { display: flex; gap: 6px; margin-top: 8px; }
+.loader-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--gold); opacity: 0;
+  animation: dot-pulse 0.9s ease-in-out infinite;
+}
+.loader-dot:nth-child(1) { animation-delay: 0s; }
+.loader-dot:nth-child(2) { animation-delay: 0.2s; }
+.loader-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dot-pulse {
+  0%,100% { opacity: 0.1; transform: scale(0.8); }
+  50%      { opacity: 1; transform: scale(1.3); }
+}
+.loader-bar-track {
+  width: 200px; height: 2px; background: rgba(255,255,255,0.15);
+  margin-top: 28px; overflow: hidden;
+}
+.loader-bar-fill {
+  height: 100%; width: 0; background: var(--gold);
+  transition: width 0.3s ease;
+}
+.loader-success {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.5s ease; pointer-events: none;
+}
+.loader-success.visible { opacity: 1; }
+.loader-success-text {
+  font-family: var(--font); font-size: clamp(22px, 4vw, 36px);
+  font-weight: 900; color: var(--white); letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.loader-success-sub {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.3em; color: var(--gold); margin-top: 12px;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--maroon);
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 4px solid var(--gold);
+}
+.site-header-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 1280px; margin: 0 auto; padding: 0 48px;
+  height: 100px;
+}
+.site-header-logo {
+  display: flex; align-items: center; gap: 16px;
+  text-decoration: none; flex-shrink: 0;
+}
+.site-header-logo svg { height: 75px; width: auto; }
+.site-header-divider {
+  width: 1px; height: 28px; background: rgba(255,255,255,0.3);
+}
+.site-header-unit {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.15em; color: rgba(255,255,255,0.7); line-height: 1.4;
+}
+
+/* Dropdown nav */
+.site-nav {
+  display: flex; align-items: stretch; gap: 0;
+  list-style: none; margin: 0; padding: 0; height: 100%;
+}
+.site-nav > li { position: relative; display: flex; align-items: center; }
+.site-nav > li > a,
+.site-nav > li > button {
+  display: flex; align-items: center; gap: 4px;
+  height: 100%; padding: 0 16px;
+  font-family: var(--font); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.75); text-decoration: none;
+  background: none; border: none; cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.site-nav > li > a:hover,
+.site-nav > li > button:hover {
+  color: var(--gold); border-bottom-color: var(--gold);
+  background: rgba(255,255,255,0.05);
+}
+.site-nav > li > button::after { content: ' ▾'; font-size: 9px; opacity: 0.7; }
+.nav-dropdown {
+  display: none; position: absolute; top: 100%; left: 0;
+  background: var(--maroon-dark);
+  border-top: 3px solid var(--gold);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-top: 3px solid var(--gold);
+  min-width: 220px; list-style: none; padding: 6px 0; margin: 0;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3); z-index: 200;
+}
+.site-nav > li:hover .nav-dropdown,
+.site-nav > li:focus-within .nav-dropdown { display: block; }
+.nav-dropdown li a {
+  display: block; padding: 10px 20px;
+  font-family: var(--font); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.7); text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+}
+.nav-dropdown li a:hover { color: var(--gold); background: rgba(255,255,255,0.06); }
+.header-right {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.2em; color: rgba(255,255,255,0.4); text-align: right;
+}
+@media (max-width: 960px) {
+  .site-header-inner { height: auto; flex-direction: column; padding: 12px 24px; gap: 8px; }
+  .site-nav { flex-wrap: wrap; justify-content: center; height: auto; }
+  .site-nav > li > a, .site-nav > li > button { padding: 8px 12px; height: auto; }
+  .header-right { display: none; }
+  .nav-dropdown { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--maroon);
+  color: var(--white);
+  min-height: 88vh; position: relative; overflow: hidden;
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.hero-bg-pattern {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 48px,
+      rgba(255,198,39,0.04) 48px,
+      rgba(255,198,39,0.04) 50px
+    );
+}
+.hero-gold-bar {
+  position: absolute; left: 0; bottom: 0; width: 100%; height: 6px;
+  background: var(--gold); z-index: 2;
+}
+.hero-text {
+  position: relative; z-index: 1;
+  padding: 100px 64px 120px 64px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.hero-eyebrow {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.3em; color: var(--gold); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before {
+  content: ''; display: block; width: 32px; height: 2px; background: var(--gold);
+}
+.hero-headline {
+  font-family: 'Barlow Condensed', var(--font); font-size: clamp(52px, 6vw, 88px);
+  font-weight: 900; line-height: 0.95; text-transform: uppercase;
+  color: var(--white); margin-bottom: 32px; letter-spacing: -0.01em;
+}
+.hero-headline span { color: var(--gold); display: block; }
+.hero-sub {
+  font-size: 16px; color: rgba(255,255,255,0.7); max-width: 480px;
+  line-height: 1.7; margin-bottom: 40px;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+.hero-tag {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em;
+  padding: 6px 14px; border: 1px solid rgba(255,198,39,0.4);
+  color: var(--gold); background: rgba(255,198,39,0.08);
+}
+.hero-visual {
+  position: relative; z-index: 1;
+  background: var(--maroon-dark);
+  display: flex; align-items: stretch; overflow: hidden;
+}
+.hero-photo {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center 30%;
+  filter: brightness(0.35);
+  display: block;
+}
+.hero-visual-inner {
+  position: relative; z-index: 1;
+  flex: 1; padding: 60px 48px;
+  display: flex; flex-direction: column; justify-content: center; gap: 32px;
+}
+.hero-stat {
+  border-left: 3px solid var(--gold);
+  padding: 16px 0 16px 24px;
+}
+.hero-stat-number {
+  font-family: 'Barlow Condensed', var(--font);
+  font-size: 52px; font-weight: 900; line-height: 1;
+  color: var(--gold); text-transform: uppercase;
+}
+.hero-stat-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.2em; color: rgba(255,255,255,0.5); margin-top: 4px;
+}
+
+/* ── GOLD BAND ── */
+.gold-band {
+  background: var(--gold); padding: 20px 0;
+  display: flex; align-items: center; justify-content: center;
+  gap: 48px; flex-wrap: wrap; overflow: hidden;
+}
+.gold-band-item {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.25em; color: var(--maroon);
+  display: flex; align-items: center; gap: 10px;
+}
+.gold-band-item::before { content: ' -- '; opacity: 0.4; }
+
+/* ── SHARED LAYOUT ── */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 64px; }
+.container--narrow { max-width: 900px; margin: 0 auto; padding: 0 64px; }
+.section { padding: 100px 0; }
+.section--dark { background: var(--black); color: var(--white); }
+.section--maroon { background: var(--maroon); color: var(--white); }
+.section--gold { background: var(--gold); color: var(--maroon); }
+.section--gray { background: var(--gray5); color: var(--black); }
+.section--white { background: var(--white); color: var(--black); }
+
+.eyebrow {
+  display: block; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.3em;
+  color: var(--maroon); margin-bottom: 16px;
+}
+.section--dark .eyebrow,
+.section--maroon .eyebrow { color: var(--gold); }
+.section--gold .eyebrow { color: var(--maroon); opacity: 0.6; }
+
+h2 {
+  font-family: 'Barlow Condensed', var(--font);
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 900; line-height: 1.05; text-transform: uppercase;
+  letter-spacing: -0.01em; margin-bottom: 24px;
+}
+h3 {
+  font-family: 'Barlow Condensed', var(--font);
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em;
+  margin-bottom: 16px;
+}
+h4 {
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.2em; margin-bottom: 12px;
+}
+p { font-size: 15px; line-height: 1.75; color: var(--gray1); margin-bottom: 16px; }
+p:last-child { margin-bottom: 0; }
+.section--dark p, .section--maroon p { color: rgba(255,255,255,0.7); }
+.section--gold p { color: var(--maroon); opacity: 0.85; }
+.gold-line { width: 48px; height: 3px; background: var(--gold); margin-bottom: 32px; }
+.maroon-line { width: 48px; height: 3px; background: var(--maroon); margin-bottom: 32px; }
+
+/* ── TWO COLUMN ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.two-col--60 { grid-template-columns: 3fr 2fr; }
+@media (max-width: 900px) {
+  .two-col, .two-col--60 { grid-template-columns: 1fr; gap: 48px; }
+  .container, .container--narrow { padding: 0 24px; }
+  .section { padding: 72px 0; }
+}
+
+/* ── ABOUT ── */
+.about-quote {
+  font-size: clamp(18px, 2vw, 24px); font-weight: 700; line-height: 1.5;
+  color: var(--white); border-left: 4px solid var(--gold);
+  padding: 20px 0 20px 28px; margin-bottom: 32px;
+}
+.three-goals { display: flex; flex-direction: column; gap: 0; }
+.goal-item {
+  display: flex; align-items: flex-start; gap: 24px;
+  padding: 28px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.goal-item:last-child { border-bottom: none; }
+.goal-number {
+  font-family: 'Barlow Condensed', var(--font);
+  font-size: 56px; font-weight: 900; line-height: 1;
+  color: var(--gold); opacity: 0.3; flex-shrink: 0; width: 56px;
+}
+.goal-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 6px; }
+.goal-body { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+/* ── WHAT IS ExL SECTION ── */
+.ExL-photo-stack { position: relative; margin-bottom: 20px; }
+.ExL-photo-main {
+  width: 100%; height: 320px; object-fit: cover; object-position: center 30%;
+  display: block;
+}
+.ExL-photo-accent {
+  position: absolute; bottom: -28px; right: -20px;
+  width: 180px; height: 140px; object-fit: cover; object-position: center;
+  display: block; border: 4px solid var(--white);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+.ExL-model-cards {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 48px;
+}
+.ExL-model-card {
+  padding: 8px 16px;
+  background: var(--gold-pale); border-left: 3px solid var(--maroon);
+}
+.ExL-model-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.15em; color: var(--maroon);
+}
+.ExL-cycle {
+  display: grid; grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 0; align-items: start;
+  background: var(--maroon); padding: 56px 64px;
+}
+.ExL-cycle-arrow {
+  font-size: 28px; color: var(--gold); opacity: 0.6;
+  align-self: center; padding: 0 24px; margin-top: -24px;
+}
+.ExL-cycle-item { padding: 0 8px; }
+.ExL-cycle-number {
+  font-family: "Barlow Condensed", var(--font);
+  font-size: 64px; font-weight: 900; color: var(--gold);
+  opacity: 0.25; line-height: 1; margin-bottom: 8px;
+}
+.ExL-cycle-title {
+  font-size: 13px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.2em; color: var(--gold); margin-bottom: 10px;
+}
+.ExL-cycle-body { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.65; }
+@media (max-width: 900px) {
+  .ExL-cycle { grid-template-columns: 1fr; padding: 40px 24px; }
+  .ExL-cycle-arrow { display: none; }
+  .ExL-photo-accent { display: none; }
+}
+
+/* ── RECOMMENDATION CARDS ── */
+.rec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; }
+.rec-card {
+  background: var(--white); padding: 36px 32px;
+  border-top: 4px solid var(--gray4);
+  transition: border-color 0.2s;
+  cursor: default;
+}
+.rec-card:hover { border-top-color: var(--maroon); }
+.rec-card.rec--priority { border-top-color: var(--gold); background: var(--gold-pale); }
+.rec-card.rec--priority:hover { border-top-color: var(--maroon); }
+.rec-tag {
+  display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.2em; padding: 4px 10px; margin-bottom: 16px;
+  background: var(--maroon); color: var(--white);
+}
+.rec-tag--gold { background: var(--gold); color: var(--maroon); }
+.rec-card h3 { font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; color: var(--black); line-height: 1.3; }
+.rec-card p { font-size: 13px; color: var(--gray1); line-height: 1.6; }
+@media (max-width: 900px) { .rec-grid { grid-template-columns: 1fr; gap: 2px; } }
+
+/* ── SCOPE ── */
+.scope-list { list-style: none; counter-reset: scope; }
+.scope-item {
+  display: grid; grid-template-columns: 48px 1fr;
+  gap: 24px; padding: 32px 0;
+  border-bottom: 1px solid var(--gray4); align-items: start;
+  counter-increment: scope;
+}
+.scope-item:last-child { border-bottom: none; }
+.scope-num {
+  font-family: 'Barlow Condensed', var(--font);
+  font-size: 36px; font-weight: 900; color: var(--gold);
+  line-height: 1; padding-top: 4px;
+}
+.scope-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--maroon); margin-bottom: 6px; }
+.scope-body { font-size: 14px; color: var(--gray1); line-height: 1.65; }
+.scope-note {
+  display: block; font-size: 12px; font-weight: 700;
+  color: var(--maroon); margin-top: 8px; text-transform: uppercase; letter-spacing: 0.1em;
+}
+
+/* ── DELIVERABLES ── */
+.del-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 0; }
+.del-item {
+  background: var(--gray5); padding: 20px 24px;
+  display: flex; align-items: flex-start; gap: 12px;
+  border-left: 3px solid transparent;
+  transition: border-color 0.2s, background 0.2s;
+}
+.del-item:hover { border-left-color: var(--maroon); background: var(--white); }
+.del-check { color: var(--gold); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.del-text { font-size: 13px; font-weight: 600; color: var(--black); line-height: 1.4; text-transform: uppercase; letter-spacing: 0.05em; }
+@media (max-width: 900px) { .del-grid { grid-template-columns: 1fr 1fr; } }
+
+/* ── COMPETITION ── */
+.comp-table { width: 100%; border-collapse: collapse; margin-top: 40px; font-size: 13px; }
+.comp-table th {
+  background: var(--maroon); color: var(--white);
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
+  font-size: 10px; padding: 14px 20px; text-align: left;
+}
+.comp-table td { padding: 16px 20px; border-bottom: 1px solid var(--gray4); vertical-align: top; }
+.comp-table tr:hover td { background: var(--gold-pale); }
+.comp-table tr:last-child td { border-bottom: none; }
+.comp-name { font-weight: 700; color: var(--maroon); margin-bottom: 2px; font-size: 13px; }
+.comp-url { font-size: 11px; color: var(--gray2); text-decoration: none; letter-spacing: 0.05em; }
+.comp-url:hover { color: var(--maroon); }
+.comp-tag {
+  display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.15em; padding: 2px 8px; margin-top: 4px;
+  background: var(--maroon); color: var(--white);
+}
+.comp-aside {
+  display: block; font-size: 11px; font-style: normal; font-weight: 700;
+  color: var(--maroon); opacity: 0; max-height: 0; overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+  margin-top: 0; letter-spacing: 0.05em; text-transform: uppercase;
+}
+.comp-table tr:hover td .comp-aside { opacity: 1; max-height: 40px; margin-top: 6px; }
+
+/* ── SWOT ── */
+.swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 48px; }
+.swot-card { padding: 36px 32px; }
+.swot-card--s { background: var(--maroon); color: var(--white); }
+.swot-card--w { background: var(--black); color: var(--white); }
+.swot-card--o { background: var(--gold); color: var(--maroon); }
+.swot-card--t { background: var(--gray4); color: var(--black); }
+.swot-label {
+  font-family: 'Barlow Condensed', var(--font);
+  font-size: 52px; font-weight: 900; text-transform: uppercase; line-height: 1;
+  opacity: 0.15; margin-bottom: 16px; letter-spacing: -0.02em;
+}
+.swot-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 16px; }
+.swot-card--s .swot-title { color: var(--gold); }
+.swot-card--w .swot-title { color: var(--gold); }
+.swot-card--o .swot-title { color: var(--maroon); }
+.swot-card--t .swot-title { color: var(--gray1); }
+.swot-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.swot-list li { font-size: 13px; line-height: 1.5; padding-left: 16px; position: relative; }
+.swot-list li::before { content: '\2013'; position: absolute; left: 0; opacity: 0.5; }
+.swot-card--s .swot-list li { color: rgba(255,255,255,0.8); }
+.swot-card--w .swot-list li { color: rgba(255,255,255,0.7); }
+.swot-card--o .swot-list li { color: var(--maroon); opacity: 0.85; }
+.swot-card--t .swot-list li { color: var(--gray1); }
+
+/* ── METRICS ── */
+.metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; }
+.metric-card {
+  background: var(--white); padding: 36px 32px;
+  border-top: 4px solid var(--gold);
+  transition: background 0.2s; cursor: default; position: relative;
+}
+.metric-card:hover { background: var(--gold-pale); }
+.metric-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--maroon); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.metric-card:hover::after { transform: scaleX(1); }
+.metric-number {
+  font-family: 'Barlow Condensed', var(--font);
+  font-size: 48px; font-weight: 900; color: var(--gold);
+  line-height: 1; margin-bottom: 12px; display: block;
+}
+.metric-card h4 { font-size: 12px; margin-bottom: 10px; color: var(--maroon); }
+.metric-card p { font-size: 13px; color: var(--gray1); line-height: 1.6; }
+.metric-aside {
+  font-size: 12px; font-weight: 700; color: var(--maroon); opacity: 0;
+  max-height: 0; overflow: hidden; transition: opacity 0.35s, max-height 0.35s;
+  margin-top: 0; text-transform: uppercase; letter-spacing: 0.05em;
+}
+.metric-card:hover .metric-aside { opacity: 1; max-height: 60px; margin-top: 10px; }
+@media (max-width: 900px) { .metrics-grid { grid-template-columns: 1fr; } }
+
+/* ── TIMELINE ── */
+.timeline { margin-top: 60px; }
+.timeline-item { display: grid; grid-template-columns: 180px 48px 1fr; margin-bottom: 0; }
+.timeline-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--gray2); text-align: right; padding: 20px 24px 20px 0;
+}
+.timeline-dot-col { display: flex; flex-direction: column; align-items: center; padding: 0 16px; }
+.timeline-dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--maroon); border: 3px solid var(--white);
+  box-shadow: 0 0 0 2px var(--maroon); flex-shrink: 0; z-index: 1; margin-top: 22px;
+}
+.timeline-item:first-child .timeline-dot { background: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+.timeline-line { width: 2px; flex: 1; background: var(--gray4); }
+.timeline-item:last-child .timeline-line { display: none; }
+.timeline-content { padding: 16px 0 16px 0; }
+.timeline-content h4 { color: var(--maroon); margin-bottom: 4px; }
+.timeline-content p { font-size: 13px; color: var(--gray1); line-height: 1.6; }
+@media (max-width: 700px) { .timeline-item { grid-template-columns: 90px 40px 1fr; } }
+.timeline-note {
+  margin-top: 48px; padding: 20px 28px;
+  background: var(--gold-pale); border-left: 4px solid var(--maroon);
+}
+.timeline-note p { font-size: 13px; color: var(--gray1); line-height: 1.7; margin: 0; }
+
+/* ── STAKEHOLDERS ── */
+.stakeholder-list { display: flex; flex-direction: column; }
+.stakeholder-item {
+  display: grid; grid-template-columns: 100px 1fr;
+  gap: 28px; align-items: center;
+  padding: 28px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.stakeholder-item:first-child { border-top: 1px solid rgba(255,255,255,0.1); }
+.stakeholder-avatar {
+  width: 100px; height: 100px; border-radius: 50%; overflow: hidden;
+  border: 2px solid rgba(255,198,39,0.4); flex-shrink: 0;
+}
+.stakeholder-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
+.stakeholder-name { font-size: 16px; font-weight: 700; color: var(--white); font-family: var(--font); }
+.stakeholder-role {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em;
+  color: var(--gold); margin-top: 4px;
+}
+.stakeholder-note { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 6px; }
+
+/* ── NOTES ── */
+.notes-section { background: var(--black); padding: 100px 0; }
+.accordion-list { list-style: none; margin-top: 48px; }
+.accordion-item { border-bottom: 1px solid rgba(255,255,255,0.08); }
+.accordion-item:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+.accordion-trigger {
+  width: 100%; background: none; border: none; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 24px 0 24px 44px; gap: 24px; text-align: left; position: relative;
+}
+.accordion-trigger::before {
+  content: '\2013'; position: absolute; left: 0; top: 22px;
+  font-size: 18px; color: var(--gold); font-weight: 900;
+}
+.accordion-label {
+  font-size: 15px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: rgba(255,255,255,0.8); line-height: 1.4;
+}
+.accordion-arrow {
+  flex-shrink: 0; color: var(--gold); font-size: 18px;
+  transition: transform 0.3s; margin-top: 2px;
+}
+.accordion-item.open .accordion-arrow { transform: rotate(45deg); }
+.accordion-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0 0 0 44px;
+}
+.accordion-item.open .accordion-body { max-height: 200px; padding: 0 0 24px 44px; }
+.accordion-body p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.75; }
+
+/* ── GRADUATES BANNER ── */
+.graduates-banner {
+  position: relative; height: 480px; overflow: hidden;
+}
+.graduates-banner img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 25%;
+  display: block; filter: brightness(0.45);
+}
+.graduates-banner-overlay {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 64px;
+}
+.graduates-banner-text {
+  max-width: 760px; text-align: center;
+}
+.graduates-banner-eyebrow {
+  display: block; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.3em;
+  color: var(--gold); margin-bottom: 20px;
+}
+.graduates-banner-quote {
+  font-family: "Barlow Condensed", var(--font);
+  font-size: clamp(28px, 4vw, 52px); font-weight: 900;
+  text-transform: uppercase; line-height: 1.1;
+  color: var(--white); letter-spacing: -0.01em;
+}
+
+/* ── LIGHTBOX ── */
+.lightbox-overlay {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.92); align-items: center; justify-content: center; padding: 40px;
+}
+.lightbox-overlay.open { display: flex; }
+.lightbox-img { max-width: 90vw; max-height: 85vh; object-fit: contain; display: block; }
+.lightbox-close {
+  position: fixed; top: 24px; right: 32px; font-size: 32px; line-height: 1;
+  color: var(--white); background: none; border: none; cursor: pointer;
+  opacity: 0.7; transition: opacity 0.2s;
+}
+.lightbox-close:hover { opacity: 1; }
+
+/* ── CAROUSEL ── */
+.gallery-carousel { overflow: hidden; height: 280px; }
+.gallery-carousel-track {
+  display: flex; height: 100%;
+  animation: carousel-scroll 70s linear infinite;
+}
+.gallery-carousel-track:hover { animation-play-state: paused; }
+.gallery-carousel-track img {
+  flex-shrink: 0; height: 100%; width: auto; object-fit: cover; display: block;
+  filter: brightness(0.6) saturate(0.8);
+  transition: filter 0.3s ease;
+}
+.gallery-carousel-track img:hover { filter: brightness(1) saturate(1); }
+@keyframes carousel-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── FOOTER CAROUSEL ── */
+.gallery-carousel--footer { background: var(--black); height: 240px; }
+.gallery-carousel-track--footer { animation-duration: 80s; }
+.gallery-carousel-track--footer img {
+  height: 240px; width: auto; object-fit: cover;
+  filter: brightness(0.6) saturate(0.7);
+}
+.gallery-carousel-track--footer img:hover { filter: brightness(0.9) saturate(1); }
+
+/* ── FOOTER ── */
+.site-footer {
+  background: var(--maroon-deep); padding: 64px 0 40px;
+  border-top: 4px solid var(--gold);
+}
+.footer-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 64px;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 40px; flex-wrap: wrap;
+}
+.footer-brand svg { height: 28px; width: auto; margin-bottom: 16px; }
+.footer-brand p { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.6; max-width: 280px; }
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom {
+  max-width: 1280px; margin: 40px auto 0; padding: 24px 64px 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.25);
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ══════════ LOADER ══════════ -->
+<div id="page-loader" role="status" aria-live="polite">
+  <div id="loader-main">
+    <div class="loader-fork" aria-hidden="true">
+      <!-- Fork in the road icon  --  you're at a crossroads, choose your path -->
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 4 L32 32 M32 32 L16 52 M32 32 L48 52" stroke="#FFC627" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <circle cx="32" cy="32" r="5" fill="#FFC627"/>
+        <circle cx="32" cy="4" r="4" fill="#FFC627"/>
+        <circle cx="16" cy="52" r="4" fill="#FFC627"/>
+        <circle cx="48" cy="52" r="4" fill="#FFC627"/>
+      </svg>
+    </div>
+    <div class="loader-dots" aria-hidden="true">
+      <div class="loader-dot"></div>
+      <div class="loader-dot"></div>
+      <div class="loader-dot"></div>
+    </div>
+    <p class="loader-hang">Preparing your brief</p>
+    <p class="loader-phrase" id="loader-phrase">Loading strategy...</p>
+    <div class="loader-bar-track"><div class="loader-bar-fill" id="loader-bar"></div></div>
+  </div>
+  <div class="loader-success" id="loader-success" aria-hidden="true">
+    <div class="loader-success-text" id="loader-success-text">Let's build something.</div>
+    <div class="loader-success-sub">Brief ready</div>
+  </div>
+</div>
+
+<!-- ══════════ HEADER ══════════ -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="#" class="site-header-logo" aria-label="TPS ExL brief, back to top" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">
+      <!-- TPS Logo SVG -->
+      <svg viewBox="0 0 357.8 139.7" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <style>.st0{fill:#ffffff}</style>
+        <g>
+          <path class="st0" d="M37.1,96l6.2,16.9h-4.5l-.8-2.7h-6.2l-.8,2.7h-4.5l6.3-16.9h4.4ZM34.9,100c-.2.9-.5,1.8-.7,2.6-.4,1.3-1,3.3-1.4,4.5h4.3l-2.2-7.2Z"/>
+          <path class="st0" d="M48.4,101.7c.8-.7,1.7-1.2,3.6-1.4v3.3l-1.2.2c-1.8.3-2.3.6-2.3,2.2v7.1h-3.7v-12.6h3.6v1.3Z"/>
+          <path class="st0" d="M53.8,95.9h3.6v2.9h-3.6v-2.9ZM53.8,100.4h3.6v12.6h-3.6v-12.6Z"/>
+          <path class="st0" d="M60.2,100.4h10.7v2.8l-6.7,6.8h6.7v2.9h-11.4v-2.8l6.8-6.9h-6v-2.8Z"/>
+          <path class="st0" d="M85.5,106.6c0,3.2-1.8,6.6-6.7,6.6s-6.7-2-6.7-6.6,2.4-6.9,7.2-6.6c5.1.3,6.2,4.3,6.2,6.6ZM76.4,104.1c-.5.7-.6,1.6-.6,2.4,0,2,1,3.7,3,3.7s3-1.6,3-3.6-.3-2.5-1-3.1c-.8-.7-1.6-.7-2.2-.7-1.1,0-1.7.4-2.2,1.2Z"/>
+          <path class="st0" d="M90.9,101.5c.4-.4.6-.7,1.2-1,.6-.2,1.4-.5,2.3-.5s1.6.1,2.2.5c1.3.7,1.7,1.8,1.7,3.8v8.6h-3.7v-7.1c0-1.1,0-1.5-.2-1.9-.3-.7-.9-1-1.7-1-1.9,0-1.9,1.6-1.9,3.1v6.8h-3.7v-12.5h3.7v1.1Z"/>
+          <path class="st0" d="M100.7,103.9c0-.9.2-1.9,1.3-2.8,1.2-.9,2.6-1.1,4.1-1.1s5.3.4,5.3,3.6v7.3c0,1.3,0,1.5.4,2h-3.6v-1.2c-.9.7-2,1.5-3.8,1.5-2.9,0-4.1-2.1-4.1-3.8s1.6-3.2,2.6-3.6c1-.4,3.4-.9,4.9-1.2v-.7c0-.6,0-1.5-1.4-1.5s-1.8,1-1.9,1.5h-3.7ZM105.3,107.7c-.6.2-1.6.6-1.6,1.6s.5,1.3,1.4,1.3.9-.2,1.3-.4c1.2-.8,1.3-1.9,1.3-3.2l-2.4.8Z"/>
+          <path class="st0" d="M120.5,107.8c.4.5.8.9,1.6,1.3,1.1.6,2.3.8,3.3.8,1.7,0,3.1-.8,3.1-2s-1.7-1.6-3-1.7c-.9-.1-1.9-.2-2.8-.4-1-.2-4.6-1-4.6-4.6s3.9-5.7,6.8-5.7,6,1.9,7.5,3.2l-3.1,2.2c-.5-.5-1-1-1.7-1.4-.6-.3-1.7-.7-2.8-.7-1.7,0-2.5,1-2.5,1.8,0,1.3,1.4,1.5,2.2,1.6,1.8.2,4.2.7,5.2,1,1.9.7,2.9,2.2,2.9,4.2s-.5,2.6-1.3,3.6c-1.5,1.8-4,2.3-6.4,2.3-4.8,0-6.7-2.2-7.7-3.4l3.2-2Z"/>
+          <path class="st0" d="M135,96.8h3.7v3.9h2.4v2.3h-2.4v5.6c0,.8,0,1.4,1,1.4h1.3s0,2.8,0,2.8c-.8.1-1.3.2-1.9.2-1.3,0-2.7,0-3.5-1.2-.5-.7-.5-1.6-.5-2.8v-6h-1.8v-2.3h1.8v-3.9Z"/>
+          <path class="st0" d="M142.7,103.9c0-.9.2-1.9,1.3-2.8,1.2-.9,2.6-1.1,4.1-1.1s5.3.4,5.3,3.6v7.3c0,1.3,0,1.5.4,2h-3.6v-1.2c-.9.7-2,1.5-3.8,1.5-2.9,0-4.1-2.1-4.1-3.8s1.6-3.2,2.6-3.6c1-.4,3.4-.9,4.9-1.2v-.7c0-.6,0-1.5-1.4-1.5s-1.8,1-1.9,1.5h-3.7ZM147.4,107.7c-.6.2-1.6.6-1.6,1.6s.5,1.3,1.4,1.3.9-.2,1.3-.4c1.2-.8,1.3-1.9,1.3-3.2l-2.4.8Z"/>
+          <path class="st0" d="M156.4,96.8h3.7v3.9h2.4v2.3h-2.4v5.6c0,.8,0,1.4,1,1.4h1.3s0,2.8,0,2.8c-.8.1-1.3.2-1.9.2-1.3,0-2.7,0-3.5-1.2-.5-.7-.5-1.6-.5-2.8v-6h-1.8v-2.3h1.8v-3.9Z"/>
+          <path class="st0" d="M176.1,109.7c-.4.6-.9,1.3-1.5,1.9-1.1,1-2.7,1.8-4.7,1.8-3.7,0-6.3-2.4-6.3-6.5s1.5-6.9,6.4-6.9,2.9,0,4.5,1.8c1.6,1.8,1.7,4.2,1.8,5.6h-9c0,1.6.9,3.1,2.9,3.1s2.7-1.3,3.2-2.2l2.8,1.4ZM172.4,105.1c0-.5-.2-1.2-.7-1.8-.5-.5-1.2-.7-1.8-.7s-1.5.4-1.9.8c-.5.6-.6,1.1-.7,1.7h5.1Z"/>
+          <path class="st0" d="M196.8,96v9.5c0,1.6,0,3.3-1,4.8-1.8,2.9-5.6,3.1-6.3,3.1-1.3,0-2.8-.3-3.9-.9-3.3-1.7-3.3-4.7-3.2-7v-9.5h4.3v10.6c0,.9,0,1.6.3,2.1.5.9,1.7,1.2,2.7,1.2,2.9,0,2.9-2,2.9-3.3v-10.5h4.2Z"/>
+          <path class="st0" d="M202.9,101.5c.4-.4.6-.7,1.2-1,.6-.2,1.4-.5,2.3-.5s1.6.1,2.2.5c1.3.7,1.7,1.8,1.7,3.8v8.6h-3.7v-7.1c0-1.1,0-1.5-.2-1.9-.3-.7-.9-1-1.7-1-1.9,0-1.9,1.6-1.9,3.1v6.8h-3.7v-12.5h3.7v1.1Z"/>
+          <path class="st0" d="M212.7,95.9h3.6v2.9h-3.6v-2.9ZM212.7,100.4h3.6v12.6h-3.6v-12.6Z"/>
+          <path class="st0" d="M217.9,100.4h3.9c1.5,5.6,1.8,6.7,2.2,9.1.5-2.8.6-3.1,1.3-6l.8-3.1h3.8l-4.1,12.5h-3.9l-4.1-12.5Z"/>
+          <path class="st0" d="M242.9,109.7c-.4.6-.9,1.3-1.5,1.9-1.1,1-2.7,1.8-4.7,1.8-3.7,0-6.3-2.4-6.3-6.5s1.5-6.9,6.4-6.9,2.9,0,4.5,1.8c1.6,1.8,1.7,4.2,1.8,5.6h-9c0,1.6.9,3.1,2.9,3.1s2.7-1.3,3.2-2.2l2.8,1.4ZM239.2,105.1c0-.5-.2-1.2-.7-1.8-.5-.5-1.2-.7-1.8-.7s-1.5.4-1.9.8c-.5.6-.6,1.1-.7,1.7h5.1Z"/>
+          <path class="st0" d="M248.6,101.7c.8-.7,1.7-1.2,3.6-1.4v3.3l-1.2.2c-1.8.3-2.3.6-2.3,2.2v7.1h-3.7v-12.6h3.6v1.3Z"/>
+          <path class="st0" d="M255,108.7c1,1,2.3,1.7,3.6,1.7s2.2-.3,2.2-1.2-.3-.6-.5-.7c-.6-.3-1.4-.4-2.1-.5-.6,0-1.1-.2-1.7-.4-.8-.2-1.5-.5-2.1-1.1-.6-.6-.9-1.4-.9-2.4,0-2.1,1.8-4.2,5.3-4.2s4.7,1.3,5.6,1.9l-2.3,2.1c-1.2-.9-2.3-1.2-3.1-1.2-1.4,0-1.8.6-1.8.9,0,.7.8.9,2,1.1,2.5.5,5.4,1.1,5.4,4.1s-3,4.4-5.9,4.4-5.3-1.7-6.1-2.4l2.3-2.1Z"/>
+          <path class="st0" d="M266.3,95.9h3.6v2.9h-3.6v-2.9ZM266.3,100.4h3.6v12.6h-3.6v-12.6Z"/>
+          <path class="st0" d="M273.5,96.8h3.7v3.9h2.4v2.3h-2.4v5.6c0,.8,0,1.4,1,1.4h1.3s0,2.8,0,2.8c-.8.1-1.3.2-1.9.2-1.3,0-2.7,0-3.5-1.2-.5-.7-.5-1.6-.5-2.8v-6h-1.8v-2.3h1.8v-3.9Z"/>
+          <path class="st0" d="M292.9,100.4l-4.4,13.5c-.3.8-.6,1.6-1.2,2.3-.9.9-1.7,1-2.7,1h-2.7v-2.9h1.3c.6,0,1.5,0,1.5-.9s0-.6-.2-.9l-3.7-12.1h3.9l2.1,9,2.1-9h3.9Z"/>
+        </g>
+        <g>
+          <path class="st0" d="M150.5,30.5c-1.1,0-1.9-.9-1.9-1.9s.9-1.9,1.9-1.9,1.9.9,1.9,1.9c0,1.1-.8,1.9-1.9,1.9ZM150.5,26.4c-1.2,0-2.2.9-2.2,2.2s1.1,2.2,2.2,2.2,2.2-1,2.2-2.2c0-1.2-.9-2.2-2.2-2.2ZM149.7,27.3h.8c.3,0,.5,0,.8.2.2.1.3.3.3.6,0,.5-.3.6-.5.7l.5,1h-.5s-.5-.9-.5-.9h-.4v.9s-.5,0-.5,0v-2.4ZM150.2,27.7v.8h.2c.2,0,.2,0,.3,0,.1,0,.4,0,.4-.4s0-.2-.2-.3c0,0-.2,0-.5,0h-.2Z"/>
+          <path class="st0" d="M150,78.6s-.9-1-2.3-2.5c-1.8-1.9-1.7-3.9-1.7-3.9V26.4h-17.3v36.6c-.2,3.5-3.6,4.3-5.5,4.3-2.7,0-4.2-1.6-4.2-4.2V26.4h-16.9s-7,0-11.9,0c-9.2,0-17.9,1.4-20.9,9.1l-1.7-6.8c-.4-1.4-1.9-2.3-3.3-2.3h-30.1c-.4,0-.6.1-.4.4,0,0,.8.8,2.3,2.5,2.1,2.4,1.3,5.5,1.3,5.5l-11,44.2h16.1l2.3-9.7h15.5l2.4,9.7h21.1c8.7,0,15.7-.9,19.2-6.3,2.6,4.9,8.2,7.3,18.1,6.4,3.4-.3,6.8-1.9,8.3-4.5l.7,2.1c.6,1.3,1.8,2.2,3.4,2.2h16.2c.4,0,.6-.1.4-.4ZM66.1,35.9l2.9,1.8c0,.5-.2,1.1-.3,1.6l-3-2.8c-.3-.3,0-.7.4-.5ZM63.2,39.5l5.4,2.2c0,.6,0,1.5,0,2.2l-5.8-3.8c-.3-.2,0-.7.3-.6ZM61,43.6l8,1.8c.2,1,.6,2,1,2.8l-9.2-4c-.4-.2-.2-.7.2-.6ZM47.2,59.7l5.3-21.6,5.4,21.6h-10.7ZM91.5,66.9c-1.5,1.4-4.4,2.1-7.5,1.8-1.8-.2-3.6-1.1-3.6-1.1l-6.5,8c-.3.3-.8,0-.6-.4l4.4-8.9c0-.1,0-.2-.2-.1l-7.9,6.9c-.3.3-.7-.1-.5-.5l6.1-8.1c0,0,0-.2-.1-.1l-9.1,5.5c-.3.2-.7-.3-.4-.5l7.6-7.1c0,0,0-.2,0-.2l-10.1,4.1c-.4.1-.6-.4-.3-.6l8.9-5.8c0,0,0-.2,0-.2l-10.7,2.4c-.4,0-.5-.4-.2-.6l9.9-4.3c0,0,0-.2,0-.2l-11,.7c-.4,0-.5-.5,0-.6l10.6-2.7c0,0,0-.2,0-.2l-11-1c-.4,0-.4-.6,0-.6l11-1c0,0,.1-.1,0-.2l-10.6-2.7c-.4,0-.3-.6,0-.6l10.6.7c2.7,4.9,8.4,6.9,13.4,8.7,4.9,1.7,9.1,3.1,9.1,6.9s-.4,1.9-1.2,2.6ZM106.6,73.1l-2.5-2.2s.4-.9.6-1.5l2.4,3.2c.2.3-.2.7-.5.5ZM110.2,69.9l-5-3s.2-1.5.2-2.3l5.2,4.8c.3.3,0,.7-.4.5ZM113.2,66.2l-7.7-3.1s0-1.8-.2-2.8l8.1,5.3c.3.2,0,.7-.3.6ZM117.2,53.2l-11,1c0,0-.1.1,0,.2l10.6,2.7c.4,0,.3.6,0,.6l-11-.7c0,0-.1.1,0,.2l9.9,4.3c.4.2.2.7-.2.6l-10.1-2.3s-.4-4.5-5.7-8.2c-2.7-1.9-6.1-3.2-9-4.3-2.3-.9-4.4-1.7-5.9-2.6-1.7-1.1-2.5-2.3-2.5-3.7s.3-1.9,1-2.6c1.2-1.2,3.3-1.7,6.2-1.7,3.1,0,6.4,1.4,6.4,1.4l6.6-8.2c.3-.3.8,0,.6.4l-4.5,9c0,0,0,.2.1.1l8-6.9c.3-.3.7.1.5.5l-6.2,8.2c0,0,0,.2.1.1l9.2-5.6c.3-.2.7.3.4.5l-7.6,7.1c0,0,0,.2,0,.1l10.1-4.1c.4-.1.6.4.3.6l-8.9,5.8c0,0,0,.2,0,.2l10.7-2.4c.4,0,.5.4.2.6l-9.9,4.3c0,0,0,.2,0,.2l11-.7c.4,0,.5.5,0,.6l-10.6,2.7c0,0,0,.2,0,.2l11,1c.4,0,.4.6,0,.6Z"/>
+        </g>
+        <g>
+          <g>
+            <path class="st0" d="M161.7,26.4h9.1c3.7,0,7,0,9,2.8.9,1.3,1.3,3.1,1.3,4.6s-.3,2.5-.8,3.5c-2,4-6.1,4.1-9.2,4.2h-3.7v7.4h-5.7v-22.6ZM167.4,30.6v6.8h3.4c2.1,0,4.7,0,4.7-3.6s-2.8-3.3-4.5-3.3h-3.6Z"/>
+            <path class="st0" d="M199.5,40.6c0,4.2-2.4,8.9-9,8.9s-9-2.7-9-8.9,3.2-9.2,9.6-8.8c6.8.4,8.3,5.8,8.3,8.8ZM187.4,37.3c-.6,1-.8,2.1-.8,3.3,0,2.7,1.3,5,4,5s4-2.1,4-4.8-.4-3.3-1.4-4.2c-1-1-2.2-1-2.9-.9-1.4,0-2.2.6-2.9,1.6Z"/>
+            <path class="st0" d="M206.9,26.4v22.6h-4.9v-22.6h4.9Z"/>
+            <path class="st0" d="M224.6,32.3l-5.9,18c-.4,1.1-.7,2.1-1.6,3-1.2,1.2-2.3,1.3-3.6,1.3h-3.6v-3.9h1.7c.8,0,2,0,2-1.2s-.1-.8-.2-1.2l-5-16.1h5.2l2.8,12,2.8-12h5.2Z"/>
+            <path class="st0" d="M228.2,27.5h4.9v5.2h3.2v3h-3.3v7.5c0,1,0,1.9,1.3,1.9h1.8c0,0,0,3.8,0,3.8-1.1.2-1.7.3-2.6.3-1.7,0-3.6,0-4.6-1.6-.7-1-.7-2.2-.7-3.8v-8.1h-2.4v-3h2.4v-5.2Z"/>
+            <path class="st0" d="M254,44.8c-.6.9-1.2,1.7-2,2.5-1.4,1.3-3.6,2.4-6.3,2.4-5,0-8.4-3.2-8.4-8.6s2-9.2,8.6-9.2,3.9,0,6,2.4c2.2,2.3,2.3,5.6,2.4,7.5h-11.9c0,2.1,1.2,4.2,3.8,4.2s3.6-1.8,4.2-2.9l3.7,1.9ZM249.1,38.6c0-.7-.2-1.6-.9-2.4-.6-.6-1.5-.9-2.4-.9s-2,.6-2.5,1.1c-.7.7-.8,1.5-1,2.2h6.8Z"/>
+            <path class="st0" d="M271.4,45.1c-.6,1-1.3,2-2.6,3-1.3.9-2.9,1.5-4.8,1.5-3.2,0-8.3-1.9-8.3-8.7s2.8-9,8.4-9,5,.5,7.1,4l-3.6,2.1c-.3-.6-.6-1.2-1.4-1.8-.5-.3-1.1-.6-1.9-.6-2.7,0-3.6,3-3.6,5.1s1.1,5,3.7,5,1.5,0,2.5-1.2c.4-.5.6-.9.7-1.3l3.7,1.9Z"/>
+            <path class="st0" d="M277.6,26.4v7.7c.7-.7,2.1-2.2,4.8-2.2s2.6.4,3.6,1.2c1.5,1.2,1.7,2.8,1.7,5v11h-4.9v-8.7c0-1.3,0-2-.2-2.6-.5-1.5-1.8-1.7-2.3-1.7-.9,0-1.6.4-2,1-.6.9-.6,2.2-.6,3.7v8.3h-4.9v-22.6h4.9Z"/>
+            <path class="st0" d="M295.7,33.8c.5-.5.8-.9,1.7-1.3.8-.3,1.9-.6,3-.6s2.1.2,3,.7c1.8.9,2.2,2.4,2.2,5v11.4h-4.9v-9.4c0-1.5,0-2-.2-2.5-.4-.9-1.2-1.3-2.2-1.3-2.6,0-2.6,2.1-2.6,4.2v9h-4.9v-16.7h5v1.5Z"/>
+            <path class="st0" d="M308.7,26.4h4.9v3.8h-4.9v-3.8ZM308.7,32.3h4.9v16.7h-4.9v-16.7Z"/>
+            <path class="st0" d="M331.6,45.1c-.6,1-1.3,2-2.6,3-1.3.9-2.9,1.5-4.8,1.5-3.2,0-8.3-1.9-8.3-8.7s2.8-9,8.4-9,5,.5,7.1,4l-3.6,2.1c-.3-.6-.6-1.2-1.4-1.8-.5-.3-1.1-.6-1.9-.6-2.7,0-3.6,3-3.6,5.1s1.1,5,3.7,5,1.5,0,2.5-1.2c.4-.5.6-.9.7-1.3l3.7,1.9Z"/>
+          </g>
+          <g>
+            <path class="st0" d="M180.4,73.9c-.8,1.3-1.6,2.6-3.4,3.8-1,.7-3.2,2-6.3,2-6,0-10.8-4.4-10.8-12s4.5-12,10.9-12,4.9.9,6.6,2.2c1.6,1.2,2.3,2.5,2.9,3.6l-4.5,2.2c-.3-.7-.7-1.5-1.7-2.3-1.1-.9-2.2-1.1-3.1-1.1-3.6,0-5.6,3.4-5.6,7.2s2.5,7.4,5.6,7.4,4.1-2,4.9-3.4l4.4,2.3Z"/>
+            <path class="st0" d="M182.3,67.1c0-1.2.3-2.5,1.8-3.7,1.5-1.2,3.5-1.5,5.5-1.5s7,.5,7,4.8v9.7c0,1.8,0,2,.5,2.6h-4.8v-1.5c-1.2.9-2.7,2-5.1,2-3.8,0-5.5-2.8-5.5-5.1s2.1-4.2,3.5-4.8c1.3-.6,4.5-1.2,6.6-1.5v-.9c0-.8-.1-2-1.9-2s-2.5,1.3-2.6,2h-4.9ZM188.6,72.1c-.8.3-2.1.8-2.1,2.1s.7,1.7,1.9,1.7,1.2-.2,1.7-.5c1.6-1,1.7-2.6,1.7-4.3l-3.2,1.1Z"/>
+            <path class="st0" d="M204.9,64.1c.6-.7,1.9-2.2,4.7-2.2s3.7,1,4.6,2c1-.8,2.3-2,5-2s4.2,1.4,4.7,2.4c.4.9.4,2,.4,3.8v10.9h-4.9v-8.8c0-1,0-2.2-.2-2.8-.4-1.4-1.8-1.5-2.1-1.5s-1.1.1-1.6.5c-.9.7-.9,1.7-.9,3.5v9.1h-4.9v-9.9c0-.7,0-1.7-.5-2.4-.4-.5-1.1-.9-1.9-.9s-.9,0-1.3.4c-1.1.7-1.1,2.1-1.1,3.2v9.5h-4.9v-16.7h4.9v1.7Z"/>
+            <path class="st0" d="M231.9,63.9c.2-.2.3-.4.5-.5.8-.8,2.3-1.5,4.2-1.5,4.1,0,7.3,3.1,7.3,8.7s-1.5,8.7-7.2,8.7-2.8-.6-4.1-1.4v6.9h-5v-22.4h4.4v1.6ZM235.8,65.4c-.9,0-1.8.4-2.5,1.3-.7.9-1,2.4-1,3.9s.5,3.4,1.2,4.1c.6.6,1.4,1,2.2,1,2.4,0,3.5-2.6,3.5-5.2s-.6-4.5-2.6-5.1c-.2,0-.4,0-.7,0Z"/>
+            <path class="st0" d="M256.1,62.3h4.9v16.7h-4.9v-1.6c-.5.5-.8.9-1.7,1.3-1,.5-2.1.8-3.2.8s-3.1-.2-4.3-1.8c-.9-1.2-1-2.2-1-4.9v-10.5h5v10.4c0,.7,0,1.5.4,2,.3.4,1,.8,2,.8s1,0,1.7-.4c1.1-.6,1.1-1.5,1.1-2.4v-10.4Z"/>
+            <path class="st0" d="M265.8,73.4c1.3,1.3,3,2.3,4.9,2.3s3-.4,3-1.6-.4-.8-.6-1c-.7-.4-1.9-.5-2.8-.6-.7-.1-1.5-.3-2.2-.5-1-.3-2-.7-2.8-1.4s-1.2-1.9-1.2-3.1c0-2.8,2.4-5.6,7-5.6s6.3,1.7,7.5,2.5l-3,2.8c-1.6-1.2-3-1.7-4.2-1.7-1.9,0-2.4.8-2.4,1.2,0,1,1.1,1.2,2.7,1.4,3.4.6,7.3,1.5,7.3,5.5s-4,5.9-7.9,5.9-7-2.2-8.1-3.2l3.1-2.8Z"/>
+          </g>
+        </g>
+      </svg>
+    </a>
+
+    <nav aria-label="Section navigation">
+      <ul class="site-nav">
+        <li>
+          <button aria-haspopup="true">Background</button>
+          <ul class="nav-dropdown">
+            <li><a href="#about">About the client</a></li>
+            <li><a href="#ExL">What is ExL?</a></li>
+            <li><a href="#swot">SWOT analysis</a></li>
+            <li><a href="#stakeholders">Stakeholders</a></li>
+          </ul>
+        </li>
+        <li>
+          <button aria-haspopup="true">The project</button>
+          <ul class="nav-dropdown">
+            <li><a href="#recommendations">Recommendations</a></li>
+            <li><a href="#scope">Scope of work</a></li>
+            <li><a href="#competition">Competition</a></li>
+            <li><a href="#deliverables">Deliverables</a></li>
+          </ul>
+        </li>
+        <li>
+          <button aria-haspopup="true">Details</button>
+          <ul class="nav-dropdown">
+            <li><a href="#timeline">Timeline</a></li>
+            <li><a href="#metrics">Metrics</a></li>
+            <li><a href="#notes">Notes</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div class="header-right">GIT 450/550<br>Spring 2026</div>
+  </div>
+</header>
+
+<!-- ══════════ HERO ══════════ -->
+<main id="main-content"><section class="hero" id="top">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-gold-bar"></div>
+  <div class="hero-text">
+    <div class="hero-eyebrow">Creative Brief</div>
+    <h1 class="hero-headline">
+      <span>Principled</span>
+      Innovation.
+    </h1>
+    <p class="hero-sub">The Polytechnic School's Experiential Learning Council has spent two semesters defining what ExL means at TPS. Now they need your team to bring that vision to life through research, brand identity, digital experience, and a physical environmental concepts.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">Strategy &amp; Research</span>
+      <span class="hero-tag">Brand Identity</span>
+      <span class="hero-tag">Digital Experience</span>
+      <span class="hero-tag">Physical Environment</span>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="images/250502 ASU Innovation Showcase - Spring 2025 DP7A5180 - AW.jpg"
+         alt="ASU Innovation Showcase, Spring 2025"
+         class="hero-photo">
+    <div class="hero-visual-inner">
+      <div class="hero-stat">
+        <div class="hero-stat-number">3</div>
+        <div class="hero-stat-label">Core ExL Goals</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">4</div>
+        <div class="hero-stat-label">Key Audiences</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">6</div>
+        <div class="hero-stat-label">Council Members</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ GOLD BAND ══════════ -->
+<div class="gold-band">
+  <div class="gold-band-item">The Polytechnic School</div>
+  <div class="gold-band-item">Arizona State University</div>
+  <div class="gold-band-item">Experiential Learning Initiative</div>
+</div>
+
+<!-- ══════════ PHOTO CAROUSEL ══════════ -->
+<div class="gallery-carousel" role="presentation" aria-hidden="true">
+  <div class="gallery-carousel-track">
+    <!-- Polytechnic-priority images first, then others -->
+    <img src="images/241118 ASU Polytechnic - EGR 306 class photoshoot - DP1A7289 -  SM .jpg" alt="EGR 306 class">
+    <img src="images/251021 ASU Polytechnic - Robotic Class - SM - 328A4940.jpg" alt="Robotics class">
+    <img src="images/250603 ASU Polytechnic Assets - Classroom 043 - SV - From W.P. Carey.jpg" alt="Polytechnic classroom">
+    <img src="images/251021 ASU Polytechnic - GIT Class photos - SM - 663A0840.jpg" alt="GIT class">
+    <img src="images/251021 ASU Polytechnic - Anatomage Table - SM - 663A0373.jpg" alt="Anatomage table">
+    <img src="images/250321 ASU Polytechnic - Summit Automation Shoot - 663A9469.CR3 - SM .jpg" alt="Summit automation">
+    <img src="images/251021 ASU Polytechnic - Microbiology Lab - SM - 663A0658.jpg" alt="Microbiology lab">
+    <img src="images/260225 ASU Polytechnic - EGR 102 Lab - 1D9A2508 - SM.jpg" alt="EGR 102 lab">
+    <img src="images/250603 ASU Polytechnic Assets - Faculty 001 - SV - From W.P. Carey.jpg" alt="Faculty">
+    <img src="images/260122 ASU Employability Ammon Hall 663A9365 SM.jpg" alt="Employability">
+    <!-- Duplicate for seamless loop -->
+    <img src="images/241118 ASU Polytechnic - EGR 306 class photoshoot - DP1A7289 -  SM .jpg" alt="" aria-hidden="true">
+    <img src="images/251021 ASU Polytechnic - Robotic Class - SM - 328A4940.jpg" alt="" aria-hidden="true">
+    <img src="images/250603 ASU Polytechnic Assets - Classroom 043 - SV - From W.P. Carey.jpg" alt="" aria-hidden="true">
+    <img src="images/251021 ASU Polytechnic - GIT Class photos - SM - 663A0840.jpg" alt="" aria-hidden="true">
+    <img src="images/251021 ASU Polytechnic - Anatomage Table - SM - 663A0373.jpg" alt="" aria-hidden="true">
+    <img src="images/250321 ASU Polytechnic - Summit Automation Shoot - 663A9469.CR3 - SM .jpg" alt="" aria-hidden="true">
+    <img src="images/251021 ASU Polytechnic - Microbiology Lab - SM - 663A0658.jpg" alt="" aria-hidden="true">
+    <img src="images/260225 ASU Polytechnic - EGR 102 Lab - 1D9A2508 - SM.jpg" alt="" aria-hidden="true">
+    <img src="images/250603 ASU Polytechnic Assets - Faculty 001 - SV - From W.P. Carey.jpg" alt="" aria-hidden="true">
+    <img src="images/260122 ASU Employability Ammon Hall 663A9365 SM.jpg" alt="" aria-hidden="true">
+  </div>
+</div>
+
+<!-- ══════════ ABOUT THE CLIENT ══════════ -->
+<section class="section section--dark" id="about">
+  <div class="container">
+    <div class="two-col two-col--60">
+      <div>
+        <span class="eyebrow">About the client</span>
+        <h2>The Polytechnic School at ASU.</h2>
+        <div class="gold-line"></div>
+        <p>The Polytechnic School (TPS) at Arizona State University is home to programs across engineering technology, computing, graphic information technology, and applied sciences. Experiential learning already happens across many of its programs, expressed through doing, reflecting, and applying.</p>
+        <p>But it happens inconsistently, under different names, with different levels of recognition, and without a unified story. The Experiential Learning Council has spent two semesters defining what ExL means at TPS. Now, they need your help bringing that vision to life.</p>
+        <p>Your work should be portfolio-ready and demonstrate professional execution across all deliverables. This is about translating design strategy into a compelling narrative that works in the real world.</p>
+        <a href="https://docs.google.com/presentation/d/1kij2r-5ZVUwAoAGPLHbpGWhkOWNXuWN_/edit?usp=sharing" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:14px 24px;background:var(--gold);color:var(--maroon);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.2em;text-decoration:none;transition:background 0.2s;">View Council Recommendations →</a>
+      </div>
+      <div>
+        <div class="about-quote">"Experiential learning at TPS is built on active, hands-on practice solving real-world problems that students genuinely care about, paired with reflection, feedback, and applied theory to deepen understanding."</div>
+        <div class="three-goals">
+          <div class="goal-item">
+            <div class="goal-number">01</div>
+            <div>
+              <div class="goal-title">Preparation</div>
+              <div class="goal-body">Identify meaningful problems and apply disciplinary tools to solve them.</div>
+            </div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-number">02</div>
+            <div>
+              <div class="goal-title">Application</div>
+              <div class="goal-body">Practice solving real-world problems through a variety of ExL models.</div>
+            </div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-number">03</div>
+            <div>
+              <div class="goal-title">Reflection</div>
+              <div class="goal-body">Reflect on personal decisions and skill development throughout the process.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ WHAT IS ExL ══════════ -->
+<section class="section section--white" id="ExL">
+  <div class="container">
+    <div class="two-col two-col--60">
+      <div>
+        <span class="eyebrow" style="color:var(--maroon);">What is experiential learning?</span>
+        <h2>Learning by doing, and thinking about what you did.</h2>
+        <div class="maroon-line"></div>
+        <p>Experiential learning is defined as learning from experience: learning by doing and then reflecting on it. Skills and knowledge are acquired through firsthand experiences rather than passive instruction. At TPS, this includes internships, capstone projects, co-ops, research, field practicums, service learning, and hands-on lab work across every program.</p>
+        <p>What makes TPS's approach distinct is the insistence on pairing practice with reflection (Principled Innovation<sup>™</sup>). Doing something is not enough. Students are expected to think critically about what they did, what they learned, and how it connects to theory and future practice. That cycle (doing, reflecting, applying) is the engine of ExL @ TPS.</p>
+        <p>The council's charge is to make this practice visible, recognized, and scalable across all TPS programs. Right now, it happens unevenly. Your team is being asked to design the brand, the digital experience, and the physical environment that will make ExL @ TPS impossible for faculty to miss and interested in seeking out.</p>
+        <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:28px;">
+          <a href="https://rennackerstudio.box.com/s/zvhnebdkdrnpbx8o1wwn5ul6no85bkhv" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:10px;padding:14px 24px;background:var(--maroon);color:var(--white);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.2em;text-decoration:none;transition:background 0.2s;">
+            Academic Papers on ExL →
+          </a>
+          <a href="https://universitycollege.asu.edu/services/work-learn/eli" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border:2px solid var(--maroon);color:var(--maroon);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.2em;text-decoration:none;transition:background 0.2s;">
+            ASU ExL Initiatives →
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="ExL-photo-stack">
+          <img src="images/251024 ASU Polytechnic Campus - Dreamscape Class DP7A0287 - PP .jpg"
+               alt="Dreamscape class at ASU Polytechnic Campus" class="ExL-photo-main">
+          <img src="images/251021 ASU Polytechnic - Horticulture Lab DP7A9927 AES.jpg"
+               alt="Horticulture lab at ASU Polytechnic" class="ExL-photo-accent">
+        </div>
+        <div class="ExL-model-cards">
+          <div class="ExL-model-card">
+            <div class="ExL-model-label">Internships</div>
+          </div>
+          <div class="ExL-model-card">
+            <div class="ExL-model-label">Capstone projects</div>
+          </div>
+          <div class="ExL-model-card">
+            <div class="ExL-model-label">Research</div>
+          </div>
+          <div class="ExL-model-card">
+            <div class="ExL-model-label">Service learning</div>
+          </div>
+          <div class="ExL-model-card">
+            <div class="ExL-model-label">Co-ops</div>
+          </div>
+          <div class="ExL-model-card">
+            <div class="ExL-model-label">Field practicums</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Three-column cycle visual -->
+    <div class="ExL-cycle" style="margin-top:80px;">
+      <div class="ExL-cycle-item">
+        <div class="ExL-cycle-number">01</div>
+        <div class="ExL-cycle-title">Preparation</div>
+        <div class="ExL-cycle-body">Identify a meaningful real-world problem and apply disciplinary knowledge and tools to understand it before acting.</div>
+      </div>
+      <div class="ExL-cycle-arrow">→</div>
+      <div class="ExL-cycle-item">
+        <div class="ExL-cycle-number">02</div>
+        <div class="ExL-cycle-title">Application</div>
+        <div class="ExL-cycle-body">Engage directly with the problem through one of TPS's experiential models: internship, capstone, lab, service learning, or co-op.</div>
+      </div>
+      <div class="ExL-cycle-arrow">→</div>
+      <div class="ExL-cycle-item">
+        <div class="ExL-cycle-number">03</div>
+        <div class="ExL-cycle-title">Reflection</div>
+        <div class="ExL-cycle-body">Think critically about decisions made, skills developed, and lessons learned. Connect the experience to theory and future practice.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SWOT ══════════ -->
+<section class="section section--white" id="swot" style="padding-top:0;">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--maroon);">Strategic Context</span>
+    <h2>ExL @ TPS: SWOT analysis.</h2>
+    <div class="maroon-line"></div>
+    <p style="max-width:640px; color:var(--gray1);">The council produced this analysis as part of their end-of-year recommendations. Use it as a strategic foundation for your positioning work.  Every strength should be amplified, every gap should be addressed.</p>
+    <div class="swot-grid">
+      <div class="swot-card swot-card--s">
+        <div class="swot-label">S</div>
+        <div class="swot-title">Strengths</div>
+        <ul class="swot-list">
+          <li>TPS is a leader in hands-on learning</li>
+          <li>Faculty already engage in experiential work, but in fragmented ways</li>
+          <li>Existing industry connections and partnerships could be better utilized</li>
+          <li>Internship infrastructure could be strengthened and systematized</li>
+        </ul>
+      </div>
+      <div class="swot-card swot-card--w">
+        <div class="swot-label">W</div>
+        <div class="swot-title">Weaknesses</div>
+        <ul class="swot-list">
+          <li>Fragmented approach across programs</li>
+          <li>Inconsistent terminology and recognition</li>
+          <li>No dedicated leadership or full-time staff</li>
+          <li>Career Services not integrated with ExL initiatives</li>
+        </ul>
+      </div>
+      <div class="swot-card swot-card--o">
+        <div class="swot-label">O</div>
+        <div class="swot-title">Opportunities</div>
+        <ul class="swot-list">
+          <li>New industrial park location (areas around TPS are rapidly developing)</li>
+          <li>Corporate sponsorships (partner with employers in the industrial park)</li>
+          <li>Position as ExL leader regionally and nationally</li>
+          <li>Grants and awards to faculty as recruitment and retention tools</li>
+          <li>Connect all program Industry Advisory Boards (IABs) through one center</li>
+          <li>Co-ops</li>
+        </ul>
+      </div>
+      <div class="swot-card swot-card--t">
+        <div class="swot-label">T</div>
+        <div class="swot-title">Threats</div>
+        <ul class="swot-list">
+          <li>Budget constraints for new staffing and operations</li>
+          <li>Faculty buy-in to systemic changes and loss of autonomy</li>
+          <li>Competition for student time and resources</li>
+          <li>ExL is currently perceived as "nice to have" versus essential</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STAKEHOLDERS ══════════ -->
+<section class="section section--dark" id="stakeholders">
+  <div class="container--narrow">
+    <span class="eyebrow">Stakeholders</span>
+    <h2>Who's in the room.</h2>
+    <div class="gold-line"></div>
+    <p>The Experiential Learning Council, as a whole, is your client. These are the people who will evaluate your concept and select the direction TPS moves forward with.</p>
+    <div class="stakeholder-list" style="margin-top:48px;">
+      <div class="stakeholder-item">
+        <div class="stakeholder-avatar"><img src="https://poly.engineering.asu.edu/wp-content/uploads/sites/27/2020/07/kgpaters.png" alt="Kurt Patterson" data-lightbox data-caption="Kurt Patterson  --  Director, The Polytechnic School"></div>
+        <div>
+          <div class="stakeholder-name">Kurt Patterson</div>
+          <div class="stakeholder-role">Professor and Director, The Polytechnic School</div>
+          <div class="stakeholder-note">The decision-maker. Design for his vision of TPS as a nationally recognized leader in experiential learning.</div>
+        </div>
+      </div>
+      <div class="stakeholder-item">
+        <div class="stakeholder-avatar"><img src="https://poly.engineering.asu.edu/wp-content/uploads/sites/27/2020/07/Nadia-Kellam-POLY-Retreat-2025-EG-9380-a.jpg-scaled-e1765307847719.jpeg" alt="Nadia Kellam" data-lightbox data-caption="Nadia Kellam  --  ExL Council Member"></div>
+        <div>
+          <div class="stakeholder-name">Nadia Kellam</div>
+          <div class="stakeholder-role">ExL Council Member, Associate Professor and Associate Director for Research Excellence Engineering Programs, The Polytechnic School</div>
+          <div class="stakeholder-note">Engineering education researcher with deep expertise in how students learn through doing.</div>
+        </div>
+      </div>
+      <div class="stakeholder-item">
+        <div class="stakeholder-avatar"><img src="https://webapp4.asu.edu/photo-ws/directory_photo/cjbledso?size=medium&break=1779396575&blankImage2=1" alt="Cameron Rennacker" data-lightbox data-caption="Cameron Rennacker  --  ExL Council Member, GIT Faculty"></div>
+        <div>
+          <div class="stakeholder-name">Cameron Rennacker</div>
+          <div class="stakeholder-role">ExL Council Member, Assistant Teaching Professor, The Polytechnic School</div>
+          <div class="stakeholder-note">Strategy development and industry-minded voice on the council. Will evaluate the visual identity and communications work closely.</div>
+        </div>
+      </div>
+      <div class="stakeholder-item">
+        <div class="stakeholder-avatar"><img src="https://webapp4.asu.edu/photo-ws/directory_photo/jgriff71?size=medium&break=1779410981&blankImage2=1" alt="Joy Griffin" data-lightbox data-caption="Joy Griffin  --  ExL Council Member"></div>
+        <div>
+          <div class="stakeholder-name">Joy Griffin</div>
+          <div class="stakeholder-role">ExL Council Member, Assistant Teaching Professor, The Polytechnic School</div>
+          <div class="stakeholder-note">Brings industry and workforce development perspective to the council's recommendations through a Technology, Entrepreneurship and Management lens.</div>
+        </div>
+      </div>
+      <div class="stakeholder-item">
+        <div class="stakeholder-avatar"><img src="https://webapp4.asu.edu/photo-ws/directory_photo/rroscoe?size=medium&break=1779403381&blankImage2=1" alt="Rod Roscoe" data-lightbox data-caption="Rod Roscoe  --  ExL Council Member"></div>
+        <div>
+          <div class="stakeholder-name">Rod Roscoe</div>
+          <div class="stakeholder-role">ExL Council Member, Associate Professor, The Polytechnic School</div>
+          <div class="stakeholder-note">Human factors and learning science researcher with student experience and engagement perspectives. A strong advocate for student voice in institutional decisions.</div>
+        </div>
+      </div>
+      <div class="stakeholder-item">
+        <div class="stakeholder-avatar"><img src="https://webapp4.asu.edu/photo-ws/directory_photo/bdwilhel?size=medium&break=1779391475&blankImage2=1" alt="Benjie Wilhelm" data-lightbox data-caption="Benjie Wilhelm  --  ExL Council Member"></div>
+        <div>
+          <div class="stakeholder-name">Benjie Wilhelm</div>
+          <div class="stakeholder-role">ExL Council Member, Assistant Teaching Professor, The Polytechnic School</div>
+          <div class="stakeholder-note">Strategy development and design-focused voice on the council. Will evaluate the visual identity and communications work closely.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SHORT-TERM RECOMMENDATIONS ══════════ -->
+<section class="section section--white" id="recommendations">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--maroon);">Council Recommendations</span>
+    <h2>Where TPS is headed.</h2>
+    <div class="maroon-line"></div>
+    <p style="max-width:640px; color:var(--gray1);">The Experiential Learning Council has identified clear short-term and long-term priorities for 2026/27. Your concept should be designed to support and accelerate these recommendations. Pick from at least three deliverables below your team would be best positioned to deliver.</p>
+
+    <div class="rec-grid">
+      <div class="rec-card rec--priority">
+        <span class="rec-tag rec--gold">Short-term priority</span>
+        <h3>Hire a TPS Associate Director for ExL</h3>
+        <p><strong>No action needed.</strong>The initiative needs dedicated leadership to move from recommendation to reality. Design for a center that a director could step into and operate on day one.</p>
+      </div>
+      <div class="rec-card rec--priority">
+        <span class="rec-tag rec--gold">Short-term priority</span>
+        <h3>Develop ExL Branding &amp; Communications</h3>
+        <p>Develop branding and communication strategies for disseminating information to students and faculty about ExL. That's what you're building.</p>
+      </div>
+      <div class="rec-card rec--priority">
+        <span class="rec-tag rec--gold">Short-term priority</span>
+        <h3>Introduce ExL @ TPS at the TPS Advance</h3>
+        <p>A faculty event at the start of Fall semester recognizing people doing ExL well. Design should account for recognition artifacts, awards, and presentation collateral.</p>
+      </div>
+      <div class="rec-card">
+        <span class="rec-tag">Short-term</span>
+        <h3>Develop ExL Workshops for Faculty</h3>
+        <p>How could we get faculty to "experience" what experiential learning is like in 15-minutes at the TPS Advance? Is this a workshop, a demo, an exemplar? Craft some ideas for facilitation.</p>
+      </div>
+      <div class="rec-card">
+        <span class="rec-tag">Short-term</span>
+        <h3>Fund Collaborative Faculty Cohorts</h3>
+        <p>Sponsor 5 grants to teams of 4–6 faculty, prioritizing cross-program collaboration. The brand should support this grant culture with templates and materials.</p>
+      </div>
+      <div class="rec-card">
+        <span class="rec-tag">Short-term</span>
+        <h3>Reconfigure the ExL Council</h3>
+        <p><strong>No action needed.</strong>Determine who to bring in, appoint a director of TPS ExL Initiatives. Your stakeholder section should reflect the current council membership, not the future.</p>
+      </div>
+      <div class="rec-card" style="background:var(--gray5);">
+        <span class="rec-tag" style="background:var(--gray1);">Long-term vision</span>
+        <h3>ExL @ TPS Center with Dedicated Director</h3>
+        <p>A physical hub for everything related to ExL at TPS. Director and staff. Design the brand, ideas for future spaces, and a digital experience to support this vision from day one.</p>
+      </div>
+      <div class="rec-card" style="background:var(--gray5);">
+        <span class="rec-tag" style="background:var(--gray1);">Long-term vision</span>
+        <h3>ExL New Named Building</h3>
+        <p>A new building focused on ExL with innovative learning spaces, indoor rotunda for community events. Create physical environment concepts that speak to this scale.</p>
+      </div>
+      <div class="rec-card" style="background:var(--gray5);">
+        <span class="rec-tag" style="background:var(--gray1);">Long-term vision</span>
+        <h3>Create More ExL Spaces Across Campus</h3>
+        <p>Cross-collaborative spaces across TPS including atriums, classrooms, and workspaces. Make the Poly Library a more experiential space. Think ecosystem, not just building.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SCOPE ══════════ -->
+<section class="section section--gray" id="scope">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--maroon);">Scope of work</span>
+    <h2>What your team is building.</h2>
+    <div class="maroon-line"></div>
+    <p style="max-width:640px; color:var(--gray1); margin-bottom:0;">All teams are working from the same brief, but only one concept will be selected as the direction TPS moves forward with. Select the deliverables (at least 3) your team is best positioned to complete. The final concept must feel unified across all deliverables.</p>
+    <ul class="scope-list" style="margin-top:48px;">
+      <li class="scope-item">
+        <div class="scope-num">01</div>
+        <div>
+          <div class="scope-title">Strategy and Research</div>
+          <div class="scope-body">Competitive analysis of 5–7 peer institutions, brand positioning statement, mission/vision/values, brand pyramid, key messages for each audience, and a 3-year implementation roadmap aligned with the council's short-term and long-term recommendations.</div>
+          <span class="scope-note">Foundation. Do not skip this or rush it.</span>
+        </div>
+      </li>
+      <li class="scope-item">
+        <div class="scope-num">02</div>
+        <div>
+          <div class="scope-title">Brand Identity</div>
+          <div class="scope-body">Complete visual and verbal identity for the ExL initiative: naming recommendation, logo system, color system, typography, visual language, photography art direction, print templates, and a brand guidelines document detailed enough for someone outside your team to implement correctly.</div>
+          <span class="scope-note">Every other deliverable is built on this. Inconsistency here shows everywhere.</span>
+        </div>
+      </li>
+      <li class="scope-item">
+        <div class="scope-num">03</div>
+        <div>
+          <div class="scope-title">Digital Experience</div>
+          <div class="scope-body">Full UX/UI process for the ExL microsite extending ASU's existing digital presence. Site map, user flows, low-fidelity wireframes, high-fidelity prototype (mobile and desktop), usability testing with 10+ participants, and developer-ready handoff documentation.</div>
+          <span class="scope-note">This is not a standalone site. It must extend asu.edu, not compete with it.</span>
+        </div>
+      </li>
+      <li class="scope-item">
+        <div class="scope-num">04</div>
+        <div>
+          <div class="scope-title">Physical Environment</div>
+          <div class="scope-body">A concept for the future ExL Center on campus: space purpose and personality, interior branding, wayfinding system, zone programming (collaboration, focused work, presentations, community), and visualization through floor plan sketches, mood boards, or rendered concept imagery.</div>
+          <span class="scope-note">It needs to be a vision. It does not need to be an architectural rendering.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════ COMPETITION ══════════ -->
+<section class="section section--white" id="competition">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--maroon);">Competition</span>
+    <h2>Know the field.</h2>
+    <div class="maroon-line"></div>
+    <p style="max-width:640px; color:var(--gray1);">Research how 5–7 peer institutions position their experiential learning programs. Study these before designing anything. The gap between what they do well and what they leave unaddressed is your strategic opportunity.</p>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Institution</th>
+          <th>What to study</th>
+          <th>Where the gap likely is</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="comp-name">Stanford d.school</div>
+            <a href="https://dschool.stanford.edu" target="_blank" rel="noopener" class="comp-url">dschool.stanford.edu →</a>
+            <div><span class="comp-tag">Primary</span></div>
+          </td>
+          <td>Design thinking methodology, distinct identity within a large university, how a center becomes a movement<span class="comp-aside">Notice how the d.school has its own brand inside Stanford's. That's the model.</span></td>
+          <td>Research this yourself. Your team's observations carry more weight here.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-name">MIT Media Lab</div>
+            <a href="https://www.media.mit.edu" target="_blank" rel="noopener" class="comp-url">media.mit.edu →</a>
+            <div><span class="comp-tag">Primary</span></div>
+          </td>
+          <td>Research-to-practice pipeline, faculty and industry collaboration storytelling, prestige positioning<span class="comp-aside">How do they make research feel accessible to prospective students? Study that.</span></td>
+          <td>Research this yourself. Your team's observations carry more weight here.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-name">Olin College of Engineering</div>
+            <a href="https://www.olin.edu" target="_blank" rel="noopener" class="comp-url">olin.edu →</a>
+          </td>
+          <td>Full-institution commitment to project-based learning, how they recruit students who want this, culture-first communication<span class="comp-aside">Olin built ExL into its DNA. TPS is building ExL into an existing institution. Different problem.</span></td>
+          <td>Research this yourself. Your team's observations carry more weight here.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-name">Georgia Tech VIP Program</div>
+            <a href="https://www.vip.gatech.edu" target="_blank" rel="noopener" class="comp-url">vip.gatech.edu →</a>
+          </td>
+          <td>Scalable ExL model across programs, how they communicate multi-year student involvement, industry integration<span class="comp-aside">The VIP model is replicable. Is there something similar that could work at TPS?</span></td>
+          <td>Research this yourself. Your team's observations carry more weight here.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-name">Cal Poly</div>
+            <a href="https://www.calpoly.edu" target="_blank" rel="noopener" class="comp-url">calpoly.edu →</a>
+          </td>
+          <td>"Learn by doing" brand equity, how they own a phrase institutionally, applied science and technology identity<span class="comp-aside">TPS's peer in applied programs. What does Cal Poly do that TPS hasn't claimed yet?</span></td>
+          <td>Research this yourself. Your team's observations carry more weight here.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════ DELIVERABLES ══════════ -->
+<section class="section section--maroon" id="deliverables">
+  <div class="container">
+    <span class="eyebrow">Deliverables</span>
+    <h2>What you could submit.</h2>
+    <div class="gold-line"></div>
+    <p style="max-width:640px; color:rgba(255,255,255,0.7); margin-bottom:40px;">Every deliverable your team works on must be portfolio-ready and production-quality. Files that could be handed directly to the counsil without a follow-up email.</p>
+    <div class="del-grid">
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Competitive analysis report</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Strategic positioning framework</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">User personas: all four audiences</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Student journey map</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Ecosystem operating model</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">3-year implementation roadmap</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Complete visual identity system</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">ExL Center identity and signage</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Print template system</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Brand guidelines document</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Site map and user flows</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Low-fidelity wireframes</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">High-fidelity prototype, mobile and desktop</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Usability testing report (10+ participants)</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Design documentation for handoff</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Physical environment concept</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Packaged working files via Box Drive</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Client-ready presentation</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TIMELINE ══════════ -->
+<section class="section section--white" id="timeline">
+  <div class="container--narrow">
+    <span class="eyebrow" style="color:var(--maroon);">Timeline</span>
+    <h2>The milestones.</h2>
+    <div class="maroon-line"></div>
+    <p style="color:var(--gray1);">All deadlines are posted in Canvas. Arrive at each milestone with work that's ready to be seen.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-label">Lab 4.1</div>
+        <div class="timeline-dot-col"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+        <div class="timeline-content"><h4>Project kickoff and initial concepts</h4><p>Define your team's values, communication norms, roles, and accountability structure before a single pixel is designed. Present your competitive research findings and initial concept directions. Three concepts per team minimum.</p></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-label">Lab 4.2</div>
+        <div class="timeline-dot-col"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+        <div class="timeline-content"><h4>Revisions round 1</h4><p>Revise based on feedback. Elevate to mid fidelity. All major flows should be present and navigable. Present the concept you will proceed with.</p></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-label">Lab 4.3</div>
+        <div class="timeline-dot-col"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+        <div class="timeline-content"><h4>Revisions round 2</h4><p>Pixel-perfect. Every screen. Every flow. Every deliverable. This is the version you'd hand to a client. Make your case clearly, confidently, and completely. See Canvas for the deadline.</p></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-label">Lab 4.4</div>
+        <div class="timeline-dot-col"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+        <div class="timeline-content"><h4>Post-mortem report</h4><p>Honest reflection on what worked, what didn't, and what your team takes into the next project.</p></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-label">Project</div>
+        <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+        <div class="timeline-content"><h4>Performance evaluations</h4><p>360° evaluation of every team member's contribution, including your own.</p></div>
+      </div>
+    </div>
+    <div class="timeline-note">
+      <p><strong>Heads up on presentation deadlines:</strong> Recording submissions are due to Box Drive by 11:59 PM on the due date for Lab 4.1, and by 11:59 PM the day before the due date for all subsequent labs. This detail matters. Plan accordingly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ METRICS ══════════ -->
+<section class="section section--gray" id="metrics">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--maroon);">Metrics for success</span>
+    <h2>How we'll judge it.</h2>
+    <div class="maroon-line"></div>
+    <p style="max-width:640px; color:var(--gray1);">Six dimensions. Every team is evaluated on all six. The winning concept will be strong across all of them.</p>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <span class="metric-number">01</span>
+        <h4>On-time delivery</h4>
+        <p>All deliverables completed and presented by each milestone deadline. 100% of the work, on time, every time.</p>
+		  <p class="metric-aside">The council <em>will</em> review your work. Don't waste it.</p>
+      </div>
+      <div class="metric-card">
+        <span class="metric-number">02</span>
+        <h4>Strategic depth</h4>
+        <p>Every design decision traceable back to your research. The team can defend at least three strategic calls by citing specific findings.</p>
+        <p class="metric-aside">Aesthetic preference is not a strategy. "Our audience of prospective students needs..." is.</p>
+      </div>
+      <div class="metric-card">
+        <span class="metric-number">03</span>
+        <h4>Conceptual cohesion</h4>
+        <p>A reviewer unfamiliar with the brief should be able to describe the brand consistently after looking at any single deliverable.</p>
+        <p class="metric-aside">If the brand guidelines and the prototype look like two different projects, that's a problem.</p>
+      </div>
+      <div class="metric-card">
+        <span class="metric-number">04</span>
+        <h4>Audience clarity</h4>
+        <p>Every deliverable built with a specific audience in mind. The personas are not decorative; they are the reason decisions were made.</p>
+        <p class="metric-aside">A faculty member and a prospective student want completely different things from this brand.</p>
+      </div>
+      <div class="metric-card">
+        <span class="metric-number">05</span>
+        <h4>Quality of execution</h4>
+        <p>Pixel-perfect, well-organized, and production-ready. Files that could be handed to a developer or printer without a follow-up email.</p>
+        <p class="metric-aside">A developer opening your Figma file should feel relief, not confusion.</p>
+      </div>
+      <div class="metric-card">
+        <span class="metric-number">06</span>
+        <h4>Creative risk</h4>
+        <p>The concept does something peer institutions have not done. The team can identify one creative decision that pushed beyond the expected.</p>
+        <p class="metric-aside">Safe work passes. Bold work gets selected. Design like the council is going to use this.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ NOTES ══════════ -->
+<section class="notes-section" id="notes">
+  <div class="container--narrow">
+    <span class="eyebrow">Notes from the stakeholders</span>
+    <h2 style="color:var(--white);">Straight from the council.</h2>
+    <div class="gold-line"></div>
+    <ul class="accordion-list">
+      <li class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">
+          <span class="accordion-label">Be bold. Think big. Use strategy and creativity to differentiate.</span>
+          <span class="accordion-arrow" aria-hidden="true">+</span>
+        </button>
+        <div class="accordion-body">
+          <p>Peer institutions are doing versions of this. Your job is to do it in a way that is distinctly TPS. Not a generic higher-ed campaign, not a polished PowerPoint, not a color swap on someone else's brand. Identify what makes TPS genuinely different and build from there. Differentiation is the work, not the decoration.</p>
+        </div>
+      </li>
+      <li class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">
+          <span class="accordion-label">The research is not a formality. Every decision should be traceable back to something you learned.</span>
+          <span class="accordion-arrow" aria-hidden="true">+</span>
+        </button>
+        <div class="accordion-body">
+          <p>The competitive analysis, the personas, the journey map: none of these are boxes to check before you start designing. They are the reason your design decisions are credible. If you cannot connect a visual or structural choice back to a finding from your research, you are guessing. The council will ask you to defend your calls.</p>
+        </div>
+      </li>
+      <li class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">
+          <span class="accordion-label">The digital experience should feel like a natural extension of ASU, not a rebrand of the whole university.</span>
+          <span class="accordion-arrow" aria-hidden="true">+</span>
+        </button>
+        <div class="accordion-body">
+          <p>TPS ExL lives within a large, complex institutional system. Your microsite should feel like it belongs to asu.edu, sharing the same navigation patterns, accessibility standards, and underlying trust, while carrying its own identity and energy. The tension between institutional and distinctive is the design challenge. Solve it, do not avoid it.</p>
+        </div>
+      </li>
+      <li class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">
+          <span class="accordion-label">The physical space concept does not need to be an architectural rendering. It needs to be a vision.</span>
+          <span class="accordion-arrow" aria-hidden="true">+</span>
+        </button>
+        <div class="accordion-body">
+          <p>Floor plans, mood boards, material samples, rendered concept images, wayfinding sketches: use whatever communicates the vision clearly. The question the council is asking is what it feels like to walk into this space. What makes someone want to work there instead of a library or a coffee shop? Make that feeling legible, not just described.</p>
+        </div>
+      </li>
+      <li class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">
+          <span class="accordion-label">Collaboration is not optional. The work must show it.</span>
+          <span class="accordion-arrow" aria-hidden="true">+</span>
+        </button>
+        <div class="accordion-body">
+          <p>Every member is expected to contribute in the area where they are strongest. A student focused on UX should own the information architecture. A brand designer should be driving the visual identity. A researcher should be leading the competitive analysis. Be honest in your post-mortem about where you led and where you supported. The council evaluates teams, not individuals. A fractured team produces a fractured concept.</p>
+        </div>
+      </li>
+      <li class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">
+          <span class="accordion-label">Deliverables should be polished, professional, and presentation-ready. This work could actually be used.</span>
+          <span class="accordion-arrow" aria-hidden="true">+</span>
+        </button>
+        <div class="accordion-body">
+          <p>The winning concept will be reviewed for real-world application. That means your brand guidelines need to be detailed enough for someone outside your team to implement correctly. Your prototype needs to be functional enough for a developer to build from. Your print templates need to be production-ready. Design like the council is going to hand your files to someone on Monday morning.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════ GRADUATES BANNER ══════════ -->
+<div class="graduates-banner" role="presentation">
+  <img src="images/240409 ASU Outstanding Graduates - Spring 2024 - Day 3 DP7A8270 - SM .jpg"
+       alt="ASU Outstanding Graduates, Spring 2024">
+  <div class="graduates-banner-overlay">
+    <div class="graduates-banner-text">
+      <span class="graduates-banner-eyebrow">The goal of experiential learning</span>
+      <p class="graduates-banner-quote">Enable students to develop the perspective and wisdom needed to guide their future practice.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ KONAMI EASTER EGG ══════════ -->
+<div id="konami-overlay" role="alert" aria-live="assertive">
+  <div id="konami-msg">You activated<br>cheat mode.<br>A+ for effort.</div>
+  <div id="konami-sub">Press any key to continue</div>
+</div>
+
+<!-- ══════════ LIGHTBOX ══════════ -->
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Close">×</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<!-- ══════════ PHOTO CAROUSEL 2 (footer strip) ══════════ -->
+<div class="gallery-carousel gallery-carousel--footer" role="presentation" aria-hidden="true">
+  <div class="gallery-carousel-track gallery-carousel-track--footer">
+    <img src="images/251021 ASU Polytechnic - Building Photos - SM - 663A0986.jpg" alt="Polytechnic campus">
+    <img src="images/250603 ASU Polytechnic Assets - Garden 025 - SV - From W.P. Carey.jpg" alt="Garden campus">
+    <img src="images/250603 ASU Polytechnic Assets - Garden 030 - SV - From W.P. Carey.jpg" alt="Garden campus 2">
+    <img src="images/251023 Dreamscape Learn - Mobile unit - SM - 5188.jpg" alt="Dreamscape mobile unit">
+    <img src="images/251021 ASU Polytechnic - Anatomage Table - SM - 663A0540.jpg" alt="Anatomage table">
+    <img src="images/250215 ASU Open Door Polytechnic Campus - DP7A0291- GA .jpg" alt="Open door polytechnic">
+    <img src="images/240624 ASU Thrive Magazine AI ChatGPT 4598 KG.jpg" alt="AI and technology">
+    <img src="images/041924 ASU Online Film Students 002 JR .jpg" alt="ASU students">
+    <img src="images/230919 ASU California Center Broadway ASU_7982-LK.jpg" alt="ASU California Center">
+    <img src="images/200203 FY20 ASU Q1 Alumni at Industrious Tempe - CLP - Shannon Gilpin of Nonnahs Marketing -459.jpg" alt="ASU alumni">
+    <!-- Duplicate -->
+    <img src="images/251021 ASU Polytechnic - Building Photos - SM - 663A0986.jpg" alt="" aria-hidden="true">
+    <img src="images/250603 ASU Polytechnic Assets - Garden 025 - SV - From W.P. Carey.jpg" alt="" aria-hidden="true">
+    <img src="images/250603 ASU Polytechnic Assets - Garden 030 - SV - From W.P. Carey.jpg" alt="" aria-hidden="true">
+    <img src="images/251023 Dreamscape Learn - Mobile unit - SM - 5188.jpg" alt="" aria-hidden="true">
+    <img src="images/251021 ASU Polytechnic - Anatomage Table - SM - 663A0540.jpg" alt="" aria-hidden="true">
+    <img src="images/250215 ASU Open Door Polytechnic Campus - DP7A0291- GA .jpg" alt="" aria-hidden="true">
+    <img src="images/240624 ASU Thrive Magazine AI ChatGPT 4598 KG.jpg" alt="" aria-hidden="true">
+    <img src="images/041924 ASU Online Film Students 002 JR .jpg" alt="" aria-hidden="true">
+    <img src="images/230919 ASU California Center Broadway ASU_7982-LK.jpg" alt="" aria-hidden="true">
+    <img src="images/200203 FY20 ASU Q1 Alumni at Industrious Tempe - CLP - Shannon Gilpin of Nonnahs Marketing -459.jpg" alt="" aria-hidden="true">
+  </div>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <p style="color:rgba(255,255,255,0.5); font-size:12px; line-height:1.6; max-width:320px;">This brief was prepared for GIT 450/550 students at Arizona State University's Polytechnic campus in partnership with The Polytechnic School Experiential Learning Council.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://poly.engineering.asu.edu" target="_blank" rel="noopener">The Polytechnic School</a>
+      <a href="https://brandguide.asu.edu" target="_blank" rel="noopener">ASU Brand Guide</a>
+      <a href="https://docs.google.com/presentation/d/1kij2r-5ZVUwAoAGPLHbpGWhkOWNXuWN_/edit?usp=sharing" target="_blank" rel="noopener">Council Recommendations (PDF)</a>
+      <a href="https://canvas.asu.edu" target="_blank" rel="noopener">Canvas: Deadlines Posted Here</a>
+    </div>
+  </div>
+  <div style="text-align:center; padding: 0 64px 16px;">
+    <div class="pitchfork-egg" title="">
+      <!-- ASU pitchfork / trident icon -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 2 L12 18 M8 2 L8 8 M16 2 L16 8 M8 8 L12 12 M16 8 L12 12 M10 18 L14 18 M11 18 L11 22 M13 18 L13 22"/>
+        <line x1="12" y1="2" x2="12" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <line x1="8" y1="2" x2="8" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <line x1="16" y1="2" x2="16" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <path d="M8 8 Q10 12 12 12 Q14 12 16 8" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <line x1="12" y1="18" x2="10" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <line x1="12" y1="18" x2="14" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="pitchfork-egg-tip">Fork yeah. You found it.</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Arizona Board of Regents &nbsp;|&nbsp; GIT 450/550 Instructional Material &nbsp;|&nbsp; Spring 2026
+  </div>
+</footer>
+
+<script>
+(function() {
+  // ── LOADER ──
+  var phrases = [
+    'Loading strategy...', 'Assembling the brief...', 'Preparing your scope...',
+    'Activating the council...', 'Building something real...'
+  ];
+  var successes = ["Let's build something.", "Brief ready. Go."];
+  var loader = document.getElementById('page-loader');
+  var bar = document.getElementById('loader-bar');
+  var phraseEl = document.getElementById('loader-phrase');
+  var loaderMain = document.getElementById('loader-main');
+  var successEl = document.getElementById('loader-success');
+  var successTxt = document.getElementById('loader-success-text');
+
+  successTxt.textContent = successes[Math.floor(Math.random() * successes.length)];
+  var shuffled = phrases.slice().sort(function() { return Math.random() - 0.5; });
+  var pidx = 0;
+  phraseEl.textContent = shuffled[0];
+  document.body.style.overflow = 'hidden';
+
+  var phraseInterval = setInterval(function() {
+    pidx = (pidx + 1) % shuffled.length;
+    phraseEl.classList.add('fade-out');
+    setTimeout(function() {
+      phraseEl.textContent = shuffled[pidx];
+      phraseEl.classList.remove('fade-out');
+    }, 400);
+  }, 2000);
+
+  var startTime = performance.now();
+  function animateBar(now) {
+    var pct = Math.min(((now - startTime) / 8500) * 100, 100);
+    bar.style.width = Math.min(pct * 1.05, 98) + '%';
+    if (now - startTime < 8500) requestAnimationFrame(animateBar);
+  }
+  requestAnimationFrame(animateBar);
+
+  setTimeout(function() {
+    clearInterval(phraseInterval);
+    loaderMain.style.transition = 'opacity 0.4s';
+    loaderMain.style.opacity = '0';
+    bar.style.width = '100%';
+    setTimeout(function() {
+      loaderMain.style.display = 'none';
+      successEl.classList.add('visible');
+      successEl.removeAttribute('aria-hidden');
+    }, 400);
+    setTimeout(function() {
+      loader.classList.add('hidden');
+      document.body.style.overflow = '';
+    }, 1500);
+  }, 8500);
+
+  // ── ACCORDION ──
+  document.querySelectorAll('.accordion-trigger').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.accordion-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.accordion-item.open').forEach(function(el) {
+        el.classList.remove('open');
+        el.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+
+  // ── LIGHTBOX ──
+  var overlay = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightbox-img');
+  var lbClose = document.getElementById('lightbox-close');
+  function openLightbox(src, alt) { lbImg.src = src; lbImg.alt = alt || ''; overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeLightbox() { overlay.classList.remove('open'); document.body.style.overflow = ''; lbImg.src = ''; }
+  document.querySelectorAll('img[data-lightbox]').forEach(function(img) {
+    img.addEventListener('click', function() { openLightbox(img.src, img.alt); });
+  });
+  lbClose.addEventListener('click', closeLightbox);
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) closeLightbox(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+
+  // ── NAV ACTIVE ──
+  var navLinks = document.querySelectorAll('.nav-dropdown a');
+  var sections = [];
+  navLinks.forEach(function(link) {
+    var id = link.getAttribute('href').replace('#', '');
+    var el = document.getElementById(id);
+    if (el) sections.push({ el: el, link: link });
+  });
+  function updateNav() {
+    var scrollY = window.scrollY + 160;
+    var current = sections[0];
+    sections.forEach(function(s) {
+      if (s.el.getBoundingClientRect().top + window.scrollY <= scrollY) current = s;
+    });
+    navLinks.forEach(function(l) { l.style.color = ''; });
+    if (current) current.link.style.color = 'var(--gold)';
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+})();
+</script>
+</body>
+</html>

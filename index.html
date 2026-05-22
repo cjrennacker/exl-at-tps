@@ -246,10 +246,26 @@ body {
 }
 @media (max-width: 960px) {
   .site-header-inner { height: auto; flex-direction: column; padding: 12px 24px; gap: 8px; }
-  .site-nav { flex-wrap: wrap; justify-content: center; height: auto; }
-  .site-nav > li > a, .site-nav > li > button { padding: 8px 12px; height: auto; }
+  .site-nav { flex-wrap: wrap; justify-content: center; height: auto; width: 100%; }
+  .site-nav > li {
+    display: flex; flex-direction: column; align-items: stretch;
+    position: static; width: auto;
+  }
+  .site-nav > li > a, .site-nav > li > button {
+    padding: 8px 14px; height: auto; justify-content: center;
+  }
   .header-right { display: none; }
-  .nav-dropdown { position: static !important; width: 100%; box-shadow: none; border-top: 2px solid var(--gold); }
+  .nav-dropdown {
+    position: static !important; width: 100%; box-shadow: none;
+    border-top: 1px solid rgba(255,198,39,0.3);
+    background: rgba(255,255,255,0.05);
+    padding: 4px 0; margin: 0;
+  }
+  .nav-dropdown li a { padding: 8px 20px; text-align: center; }
+  /* Only show when button is expanded */
+  .site-nav > li .nav-dropdown { display: none; }
+  .site-nav > li > button[aria-expanded="true"] + .nav-dropdown { display: block !important; }
+  .site-nav > li:hover .nav-dropdown { display: none; }
 }
 
 /* ── HERO ── */
@@ -816,6 +832,50 @@ p:last-child { margin-bottom: 0; }
   .timeline-item { grid-template-columns: 60px 28px 1fr !important; }
   .timeline-label { font-size: 9px !important; }
 }
+
+/* ── REC CARD CLICK EXPAND ── */
+.rec-card { cursor: pointer; }
+.rec-detail {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.25s ease;
+  padding: 0; border-top: 0;
+}
+.rec-card.expanded .rec-detail {
+  max-height: 200px;
+  padding-top: 12px;
+  border-top: 1px solid var(--gray4);
+  margin-top: 12px;
+}
+.rec-card.expanded { border-top-color: var(--maroon) !important; }
+.rec-detail p {
+  font-size: 12px; color: var(--gray2); line-height: 1.6; margin: 0;
+  font-style: normal;
+}
+.rec-card-toggle {
+  display: inline-block; font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--maroon); margin-top: 10px; opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.rec-card:hover .rec-card-toggle { opacity: 1; }
+.rec-card.expanded .rec-card-toggle { opacity: 1; }
+
+/* ── DEL ITEM CLICK EXPAND ── */
+.del-item { cursor: pointer; position: relative; }
+.del-item.expanded {
+  border-left-color: var(--maroon) !important;
+  background: var(--white) !important;
+}
+.del-detail {
+  display: none; position: absolute; left: 0; right: 0;
+  top: 100%; z-index: 10;
+  background: var(--white); border: 1px solid var(--gray4);
+  border-top: 2px solid var(--maroon);
+  padding: 14px 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+.del-item.expanded .del-detail { display: block; }
+.del-detail p { font-size: 12px; color: var(--gray1); line-height: 1.6; margin: 0; }
 </style>
 </head>
 <body>
@@ -1263,31 +1323,49 @@ p:last-child { margin-bottom: 0; }
         <span class="rec-tag rec--gold">Short-term priority</span>
         <h3>Hire a TPS Associate Director for ExL</h3>
         <p><strong>No action needed.</strong>The initiative needs dedicated leadership to move from recommendation to reality. Design for a center that a director could step into and operate on day one.</p>
+      
+        <span class="rec-card-toggle">Click for context ↓</span>
+        <div class="rec-detail"><p>The initiative needs someone to own it full-time. Design the brand and space so a director could step in on day one and immediately understand the system.</p></div>
       </div>
       <div class="rec-card rec--priority">
         <span class="rec-tag rec--gold">Short-term priority</span>
         <h3>Develop ExL Branding &amp; Communications</h3>
         <p>Develop branding and communication strategies for disseminating information to students and faculty about ExL. That's what you're building.</p>
+      
+        <span class="rec-card-toggle">Click for context ↓</span>
+        <div class="rec-detail"><p>This is your brief. Students and faculty need a clear, consistent visual language and communication strategy for everything EXL-related at TPS.</p></div>
       </div>
       <div class="rec-card rec--priority">
         <span class="rec-tag rec--gold">Short-term priority</span>
         <h3>Introduce ExL @ TPS at the TPS Advance</h3>
         <p>A faculty event at the start of Fall semester recognizing people doing ExL well. Design should account for recognition artifacts, awards, and presentation collateral.</p>
+      
+        <span class="rec-card-toggle">Click for context ↓</span>
+        <div class="rec-detail"><p>See the full brief for more detail on this recommendation.</p></div>
       </div>
       <div class="rec-card">
         <span class="rec-tag">Short-term</span>
         <h3>Develop ExL Workshops for Faculty</h3>
         <p>How could we get faculty to "experience" what experiential learning is like in 15-minutes at the TPS Advance? Is this a workshop, a demo, an exemplar? Craft some ideas for facilitation.</p>
+      
+        <span class="rec-card-toggle">Click for context ↓</span>
+        <div class="rec-detail"><p>Faculty need practical training to integrate EXL into courses. Your brand should support this with materials, templates, and communication frameworks.</p></div>
       </div>
       <div class="rec-card">
         <span class="rec-tag">Short-term</span>
         <h3>Fund Collaborative Faculty Cohorts</h3>
         <p>Sponsor 5 grants to teams of 4–6 faculty, prioritizing cross-program collaboration. The brand should support this grant culture with templates and materials.</p>
+      
+        <span class="rec-card-toggle">Click for context ↓</span>
+        <div class="rec-detail"><p>Five grants to teams of four to six faculty, cross-program preferred. Your deliverables should include grant materials and recognition templates.</p></div>
       </div>
       <div class="rec-card">
         <span class="rec-tag">Short-term</span>
         <h3>Reconfigure the ExL Council</h3>
         <p><strong>No action needed.</strong>Determine who to bring in, appoint a director of TPS ExL Initiatives. Your stakeholder section should reflect the current council membership, not the future.</p>
+      
+        <span class="rec-card-toggle">Click for context ↓</span>
+        <div class="rec-detail"><p>Leadership and membership are evolving. Your stakeholder section reflects the current council. Your brand should scale as membership changes.</p></div>
       </div>
       <div class="rec-card" style="background:var(--gray5);">
         <span class="rec-tag" style="background:var(--gray1);">Long-term vision</span>
@@ -1423,24 +1501,58 @@ p:last-child { margin-bottom: 0; }
     <div class="gold-line"></div>
     <p style="max-width:640px; color:rgba(255,255,255,0.7); margin-bottom:40px;">Every deliverable your team works on must be portfolio-ready and production-quality. Files that could be handed directly to the counsil without a follow-up email.</p>
     <div class="del-grid">
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Competitive analysis report</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Strategic positioning framework</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">User personas: all four audiences</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Student journey map</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Ecosystem operating model</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">3-year implementation roadmap</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Complete visual identity system</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Competitive analysis report</span>
+      <div class="del-detail"><p>Research 5 to 7 peer institutions. Evaluate messaging, digital presence, physical infrastructure, faculty support, and strategic gaps.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Strategic positioning framework</span>
+      <div class="del-detail"><p>Positioning statement, mission/vision/values, brand pyramid, and key messages tailored to each of the four primary audiences.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">User personas: all four audiences</span>
+      <div class="del-detail"><p>Prospective students, current students, faculty, and industry partners. Each with goals, pain points, behaviors, and what they need from this initiative.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Student journey map</span>
+      <div class="del-detail"><p>From first learning about TPS through graduation. Includes how EXL is discovered, enrolled in, experienced, and documented on a resume.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Ecosystem operating model</span>
+      <div class="del-detail"><p>A visual map of how the EXL Center connects programs, faculty, students, industry partners, administration, Career Services, and ASU systems.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">3-year implementation roadmap</span>
+      <div class="del-detail"><p>Year 1: quick wins and pilots. Year 2: scaling and refinement. Year 3: full implementation and a credible bid for national recognition.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Complete visual identity system</span>
+      <div class="del-detail"><p>Logo system, color system, typography, visual language, photography art direction, icon system, grid and layout principles.</p></div>
+    </div>
       <div class="del-item"><span class="del-check">✦</span><span class="del-text">ExL Center identity and signage</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Print template system</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Brand guidelines document</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Site map and user flows</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Low-fidelity wireframes</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">High-fidelity prototype, mobile and desktop</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Usability testing report (10+ participants)</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Design documentation for handoff</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Physical environment concept</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Packaged working files via Box Drive</span></div>
-      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Client-ready presentation</span></div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Print template system</span>
+      <div class="del-detail"><p>Awards and certificates, one-pagers for EXL opportunities, flyers, posters, postcards, and environmental graphics.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Brand guidelines document</span>
+      <div class="del-detail"><p>Detailed enough for someone outside your team to implement the brand correctly. Covers everything from logo usage to photography direction.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Site map and user flows</span>
+      <div class="del-detail"><p>All pages and hierarchy, connections to existing ASU pages, and user flows for key tasks across all four audience types.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Low-fidelity wireframes</span>
+      <div class="del-detail"><p>Structure, hierarchy, and functionality before visual design. Focus on layout and content decisions, not aesthetics.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">High-fidelity prototype, mobile and desktop</span>
+      <div class="del-detail"><p>Fully interactive, responsive, built with auto-layout in Figma. Demonstrates all key user flows end to end with micro-interactions.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Usability testing report (10+ participants)</span>
+      <div class="del-detail"><p>Test scenarios, observation notes, qualitative and quantitative findings, and documented design iterations based on results.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Design documentation for handoff</span>
+      <div class="del-detail"><p>Component library with usage guidelines, responsive behavior specs, animation details, and accessibility notes.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Physical environment concept</span>
+      <div class="del-detail"><p>Space purpose and personality, interior branding, wayfinding, zone programming, and concept visualization.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Packaged working files via Box Drive</span>
+      <div class="del-detail"><p>All source files, organized and labeled. A developer or printer should be able to work from them without a follow-up email.</p></div>
+    </div>
+      <div class="del-item"><span class="del-check">✦</span><span class="del-text">Client-ready presentation</span>
+      <div class="del-detail"><p>Complete concept presented to the TPS ExL Council. One team's work will be evaluated for real-world application.</p></div>
+    </div>
     </div>
   </div>
 </section>
@@ -1967,6 +2079,58 @@ var KEY_CREDIT  = 'tps_quiz_credited';
 var quizQuestions=[], currentQ=0, score=0, selectedAnswers=[];
 var lockoutTimer=null;
 
+
+// ══ REC CARD CLICK EXPAND ══
+document.querySelectorAll('.rec-card').forEach(function(card) {
+  card.addEventListener('click', function() {
+    var isExpanded = card.classList.contains('expanded');
+    // Close all others
+    document.querySelectorAll('.rec-card.expanded').forEach(function(c) {
+      c.classList.remove('expanded');
+      var toggle = c.querySelector('.rec-card-toggle');
+      if (toggle) toggle.textContent = 'Click for context ↓';
+    });
+    if (!isExpanded) {
+      card.classList.add('expanded');
+      var toggle = card.querySelector('.rec-card-toggle');
+      if (toggle) toggle.textContent = 'Click to collapse ↑';
+    }
+  });
+  // Keyboard accessible
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+  });
+});
+
+// ══ DELIVERABLE ITEM CLICK EXPAND ══
+document.querySelectorAll('.del-item').forEach(function(item) {
+  var detail = item.querySelector('.del-detail');
+  if (!detail) return;
+  item.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var isExpanded = item.classList.contains('expanded');
+    // Close all others
+    document.querySelectorAll('.del-item.expanded').forEach(function(d) {
+      d.classList.remove('expanded');
+    });
+    if (!isExpanded) item.classList.add('expanded');
+  });
+  item.setAttribute('role', 'button');
+  item.setAttribute('tabindex', '0');
+  item.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); }
+  });
+});
+// Close del-detail on outside click
+document.addEventListener('click', function() {
+  document.querySelectorAll('.del-item.expanded').forEach(function(d) {
+    d.classList.remove('expanded');
+  });
+});
+
+
 function initQuiz() {
   var triggerEl=document.getElementById('quiz-trigger'), startBtn=document.getElementById('quiz-start-btn'),
       modalEl=document.getElementById('quiz-modal'), successEl=document.getElementById('quiz-success'),
@@ -2031,11 +2195,12 @@ function initQuiz() {
     document.querySelectorAll('.stakeholder-avatar img').forEach(function(img) {
       if (img.src && img.src.indexOf('cjbledso') > -1) {
         var clicks=0, clickTimer=null;
-        img.addEventListener('click', function(e) {
+        function handleEggTap(e) {
           e.stopPropagation();
+          if (e.type === 'touchend') e.preventDefault();
           clicks++;
           if(clickTimer) clearTimeout(clickTimer);
-          clickTimer=setTimeout(function(){clicks=0;},700);
+          clickTimer=setTimeout(function(){clicks=0;},1200);
           if(clicks>=3){
             clicks=0;
             var rect=img.getBoundingClientRect();
@@ -2048,13 +2213,89 @@ function initQuiz() {
             eggTip.textContent="That's the instructor. He wrote this brief. No pressure.";
             setTimeout(function(){eggTip.style.display='none';},3500);
           }
-        });
+        }
+        img.addEventListener('click', handleEggTap);
+        img.addEventListener('touchend', handleEggTap);
       }
     });
   }
 } // end initQuiz
 
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initQuiz);}else{initQuiz();}
+
+  // ══ REC CARD CLICK EXPAND ══
+  document.querySelectorAll('.rec-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var wasOpen = card.classList.contains('expanded');
+      // Close all
+      document.querySelectorAll('.rec-card.expanded').forEach(function(c) {
+        c.classList.remove('expanded');
+        var t = c.querySelector('.rec-card-toggle');
+        if (t) t.textContent = 'Click for context ↓';
+      });
+      if (!wasOpen) {
+        card.classList.add('expanded');
+        var t = card.querySelector('.rec-card-toggle');
+        if (t) t.textContent = 'Click to close ↑';
+      }
+    });
+  });
+
+  // ══ DELIVERABLE ITEM CLICK ══
+  document.querySelectorAll('.del-item').forEach(function(item) {
+    var detail = item.querySelector('.del-detail');
+    if (!detail) return;
+    item.addEventListener('click', function(e) {
+      var wasOpen = item.classList.contains('expanded');
+      document.querySelectorAll('.del-item.expanded').forEach(function(d) { d.classList.remove('expanded'); });
+      if (!wasOpen) item.classList.add('expanded');
+    });
+    document.addEventListener('click', function(e) {
+      if (!item.contains(e.target)) item.classList.remove('expanded');
+    });
+  });
+
+
+  // ══ CAMERON EASTER EGG (standalone, runs regardless of quiz state) ══
+  (function() {
+    var tip = document.getElementById('cameron-egg-tip');
+    if (!tip) {
+      tip = document.createElement('div');
+      tip.id = 'cameron-egg-tip';
+      tip.style.cssText = 'display:none;position:fixed;z-index:3000;background:var(--maroon);border:2px solid var(--gold);padding:10px 16px;font-size:12px;font-weight:700;color:var(--gold);max-width:240px;text-align:center;line-height:1.4;box-shadow:0 8px 28px rgba(0,0,0,0.4);pointer-events:none;font-family:var(--font);';
+      document.body.appendChild(tip);
+    }
+    tip.textContent = "That's the instructor. He wrote this brief. No pressure.";
+
+    document.querySelectorAll('.stakeholder-avatar img').forEach(function(img) {
+      if (img.src && img.src.indexOf('cjbledso') > -1) {
+        img.style.cursor = 'pointer';
+        var clicks = 0, clickTimer = null;
+        // Remove any existing listeners by cloning
+        var newImg = img.cloneNode(true);
+        img.parentNode.replaceChild(newImg, img);
+        newImg.addEventListener('click', function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          clicks++;
+          if (clickTimer) clearTimeout(clickTimer);
+          clickTimer = setTimeout(function() { clicks = 0; }, 800);
+          if (clicks >= 3) {
+            clicks = 0;
+            var rect = newImg.getBoundingClientRect();
+            tip.style.display = 'block';
+            var left = Math.max(8, rect.left + rect.width / 2 - 120);
+            var top = rect.top + window.scrollY - 70;
+            if (top < 60) top = rect.bottom + window.scrollY + 10;
+            tip.style.left = left + 'px';
+            tip.style.top = top + 'px';
+            setTimeout(function() { tip.style.display = 'none'; }, 3500);
+          }
+        });
+      }
+    });
+  })();
+
 
 })();
 </script>

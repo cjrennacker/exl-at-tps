@@ -1938,7 +1938,7 @@ p:last-child { margin-bottom: 0; }
          alt="Cameron Rennacker" class="quiz-badge-avatar">
     <div class="quiz-badge-title">Congratulations!</div>
     <div class="quiz-badge-subtitle">You&#39;ve been awarded extra credit!</div>
-    <div class="quiz-badge-msg">Take a screenshot of this badge and send it to your professor in Slack to receive 10 points of extra credit. Limit one extra credit award per session. Additional qualifying briefs completed during the same session are not eligible for further extra credit.</div>
+    <div class="quiz-badge-msg">Take a screenshot of this badge and send it to your professor in Slack.</div>
     <div class="quiz-badge-stamp">
       <span class="quiz-badge-name">Brief Certified</span>
       <span class="quiz-badge-course">GIT 450/550 &middot; TPS ExL Initiative &middot; Spring 2026</span>
@@ -2082,25 +2082,20 @@ var lockoutTimer=null;
 
 // ══ REC CARD CLICK EXPAND ══
 document.querySelectorAll('.rec-card').forEach(function(card) {
-  card.setAttribute('role', 'button');
-  card.setAttribute('tabindex', '0');
   card.addEventListener('click', function() {
-    var wasOpen = card.classList.contains('expanded');
+    var isExpanded = card.classList.contains('expanded');
+    // Close all others
     document.querySelectorAll('.rec-card.expanded').forEach(function(c) {
       c.classList.remove('expanded');
-      var t = c.querySelector('.rec-card-toggle');
-      if (t) t.textContent = 'Click for context ↓';
+      var toggle = c.querySelector('.rec-card-toggle');
+      if (toggle) toggle.textContent = 'Click for context ↓';
     });
-    if (!wasOpen) {
+    if (!isExpanded) {
       card.classList.add('expanded');
-      var t = card.querySelector('.rec-card-toggle');
-      if (t) t.textContent = 'Click to close ↑';
+      var toggle = card.querySelector('.rec-card-toggle');
+      if (toggle) toggle.textContent = 'Click to collapse ↑';
     }
   });
-  card.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
-  });
-});
   // Keyboard accessible
   card.setAttribute('role', 'button');
   card.setAttribute('tabindex', '0');
@@ -2227,6 +2222,39 @@ function initQuiz() {
 } // end initQuiz
 
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initQuiz);}else{initQuiz();}
+
+  // ══ REC CARD CLICK EXPAND ══
+  document.querySelectorAll('.rec-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var wasOpen = card.classList.contains('expanded');
+      // Close all
+      document.querySelectorAll('.rec-card.expanded').forEach(function(c) {
+        c.classList.remove('expanded');
+        var t = c.querySelector('.rec-card-toggle');
+        if (t) t.textContent = 'Click for context ↓';
+      });
+      if (!wasOpen) {
+        card.classList.add('expanded');
+        var t = card.querySelector('.rec-card-toggle');
+        if (t) t.textContent = 'Click to close ↑';
+      }
+    });
+  });
+
+  // ══ DELIVERABLE ITEM CLICK ══
+  document.querySelectorAll('.del-item').forEach(function(item) {
+    var detail = item.querySelector('.del-detail');
+    if (!detail) return;
+    item.addEventListener('click', function(e) {
+      var wasOpen = item.classList.contains('expanded');
+      document.querySelectorAll('.del-item.expanded').forEach(function(d) { d.classList.remove('expanded'); });
+      if (!wasOpen) item.classList.add('expanded');
+    });
+    document.addEventListener('click', function(e) {
+      if (!item.contains(e.target)) item.classList.remove('expanded');
+    });
+  });
+
 
   // ══ CAMERON EASTER EGG (standalone, runs regardless of quiz state) ══
   (function() {

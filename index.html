@@ -2082,20 +2082,25 @@ var lockoutTimer=null;
 
 // ══ REC CARD CLICK EXPAND ══
 document.querySelectorAll('.rec-card').forEach(function(card) {
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
   card.addEventListener('click', function() {
-    var isExpanded = card.classList.contains('expanded');
-    // Close all others
+    var wasOpen = card.classList.contains('expanded');
     document.querySelectorAll('.rec-card.expanded').forEach(function(c) {
       c.classList.remove('expanded');
-      var toggle = c.querySelector('.rec-card-toggle');
-      if (toggle) toggle.textContent = 'Click for context ↓';
+      var t = c.querySelector('.rec-card-toggle');
+      if (t) t.textContent = 'Click for context ↓';
     });
-    if (!isExpanded) {
+    if (!wasOpen) {
       card.classList.add('expanded');
-      var toggle = card.querySelector('.rec-card-toggle');
-      if (toggle) toggle.textContent = 'Click to collapse ↑';
+      var t = card.querySelector('.rec-card-toggle');
+      if (t) t.textContent = 'Click to close ↑';
     }
   });
+  card.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+  });
+});
   // Keyboard accessible
   card.setAttribute('role', 'button');
   card.setAttribute('tabindex', '0');
@@ -2222,39 +2227,6 @@ function initQuiz() {
 } // end initQuiz
 
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initQuiz);}else{initQuiz();}
-
-  // ══ REC CARD CLICK EXPAND ══
-  document.querySelectorAll('.rec-card').forEach(function(card) {
-    card.addEventListener('click', function() {
-      var wasOpen = card.classList.contains('expanded');
-      // Close all
-      document.querySelectorAll('.rec-card.expanded').forEach(function(c) {
-        c.classList.remove('expanded');
-        var t = c.querySelector('.rec-card-toggle');
-        if (t) t.textContent = 'Click for context ↓';
-      });
-      if (!wasOpen) {
-        card.classList.add('expanded');
-        var t = card.querySelector('.rec-card-toggle');
-        if (t) t.textContent = 'Click to close ↑';
-      }
-    });
-  });
-
-  // ══ DELIVERABLE ITEM CLICK ══
-  document.querySelectorAll('.del-item').forEach(function(item) {
-    var detail = item.querySelector('.del-detail');
-    if (!detail) return;
-    item.addEventListener('click', function(e) {
-      var wasOpen = item.classList.contains('expanded');
-      document.querySelectorAll('.del-item.expanded').forEach(function(d) { d.classList.remove('expanded'); });
-      if (!wasOpen) item.classList.add('expanded');
-    });
-    document.addEventListener('click', function(e) {
-      if (!item.contains(e.target)) item.classList.remove('expanded');
-    });
-  });
-
 
   // ══ CAMERON EASTER EGG (standalone, runs regardless of quiz state) ══
   (function() {

@@ -2295,7 +2295,27 @@ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded'
       }
     });
   })();
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- RECOMMENDATION CARDS TOGGLE ---
+    const recCards = document.querySelectorAll('.rec-card');
+    recCards.forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('expanded');
+        
+        // Optional: Accessibility enhancement
+        const isExpanded = card.classList.contains('expanded');
+        card.setAttribute('aria-expanded', isExpanded);
+      });
+    });
 
+    // --- DELIVERABLE ITEMS TOGGLE ---
+    const delItems = document.querySelectorAll('.del-item');
+    delItems.forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('expanded');
+      });
+    });
 
 })();
 </script>
